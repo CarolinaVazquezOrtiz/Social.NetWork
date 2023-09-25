@@ -12,6 +12,8 @@ namespace Obligatorio1
         :base(email,password,isAdmin) 
         {
             Console.WriteLine("Muestra");
+            Console.WriteLine("Muestra2");
+            Console.WriteLine("Muestra3");
         }
 
     }
