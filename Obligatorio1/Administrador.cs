@@ -10,8 +10,8 @@ namespace Obligatorio1
     {
         public Administrador(string email, string password, bool isAdmin)
         :base(email,password,isAdmin) 
-        { 
-
+        {
+            Console.WriteLine("Muestra");
         }
 
     }

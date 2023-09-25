@@ -28,6 +28,8 @@ namespace Obligatorio1
             MiembroSolicitante = miembroSolicitante;
             Estado = estado;
             FechaSolicitud = fechaSolicitud;
+
+            Console.WriteLine('mas cambios');
         }
 
         public void Validar()
