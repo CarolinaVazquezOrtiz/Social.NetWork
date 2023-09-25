@@ -29,7 +29,7 @@ namespace Obligatorio1
             Estado = estado;
             FechaSolicitud = fechaSolicitud;
 
-            Console.WriteLine('mas cambios');
+            
         }
 
         public void Validar()
