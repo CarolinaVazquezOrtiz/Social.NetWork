@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Obligatorio1
 {
@@ -19,17 +20,27 @@ namespace Obligatorio1
         
         private List<Miembro> _listaAmigos = new List<Miembro>();
 
-        public Miembro(string email, string password, bool isAdmin,string nombre, string apellido, DateTime fechaNac, bool bloqueado)
+        public Miembro(string email, string password, bool isAdmin, string nombre, string apellido, DateTime fechaNac, bool bloqueado)
         :base(email,password,isAdmin)
         {
             Nombre = nombre;
             Apellido = apellido;
             FechaNac = fechaNac;
             Bloqueado = bloqueado;
+            ValidarMiembro();
         }
 
-
-
-
+        public void ValidarMiembro()
+        {
+            if (string.IsNullOrWhiteSpace(Nombre))
+            {
+                throw new Exception("El nombre está vacío");
+            }
+            if (string.IsNullOrWhiteSpace(Apellido))
+            {
+                throw new Exception("El apellido está vacío");
+            }
+        }
+        
     }
 }

@@ -25,15 +25,28 @@ namespace Obligatorio1
             Censurado = censurado;
         }
 
-        public void Validar()
+        public void ValidarPost()
         {
-            ValidarImagen();
+            ValidarImagen(Img);
 
         }
 
-        public static void ValidarImagen()
+        //no vacío y debe terminar en “.jpg” o “.png”
+        public static void ValidarImagen(string img)
         {
-             
+            if (string.IsNullOrEmpty(img))
+            {
+                throw new Exception("Imagen vacia");
+            }
+
+            string imgMin = img.ToLower();
+            if (!imgMin.EndsWith(".jpg") && !imgMin.EndsWith(".png") )
+            {
+                throw new Exception("Formato de imagen no valido");
+            }
+
         }
+
+    
     }
 }

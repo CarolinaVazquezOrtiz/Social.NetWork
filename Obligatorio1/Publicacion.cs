@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Obligatorio1
 {
 
-    public class Publicacion
+    public abstract class Publicacion
     {
         //Static
         private static int autID;
@@ -32,25 +32,44 @@ namespace Obligatorio1
 
         public void Validar()
         {
-            ValidarContendio();
-            ValidarTitulo();
-            ValidarMiembro();
+            ValidarContenido(Contenido);
+            ValidarTitulo(Titulo);
+            ValidarMiembro(Miembro);
         }
 
-        public static void ValidarContendio()
+        //no vacío
+        public static void ValidarContenido(string cont)
         {
-
+            if (string.IsNullOrEmpty(cont))
+            {
+                throw new Exception("Contenido vacio");
+            }
         }
 
-        public static void ValidarTitulo()
+        //titulo no vacío, al menos de 3 caracteres
+        public static void ValidarTitulo(string tit)
         {
-            
+            if (string.IsNullOrEmpty(tit) || tit.Length < 3)
+            {
+                throw new Exception("El título debe contener al menos 3 caracteres");
+            }
         }
 
-        public static void ValidarMiembro()
+        public static bool ValidarMiembro(Miembro miembro)
         {
-
+            bool existe = false;
+            foreach (Usuario miem in Sistema.ListaUsuarios)        //esta bien????
+            {
+                if (!miem.isAdmin)
+                {
+                    existe = true;
+                    break;
+                }
+            }
+            return existe;
         }
+
+
 
     }
 }

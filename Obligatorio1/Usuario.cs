@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Obligatorio1
@@ -19,24 +20,49 @@ namespace Obligatorio1
             Email = email;
             Password = password;
             IsAdmin = isAdmin;
+            Validar();
         }
 
 
         public void Validar()
         {
-            ValidarMail();
-            ValidarPassword();
+            ValidarEmail(Email);
+            ValidarPassword(Password);
         }
 
-        public static void ValidarMail()
+        public static void ValidarEmail(string email)
         {
-
+            if (!FormatoEmail(email))
+            {
+                throw new Exception("El Formato del email no es valido");
+            }
         }
 
-        public static void ValidarPassword()
+        private static bool FormatoEmail(String email)
         {
+            // Define una expresión regular para validar direcciones de correo electrónico.
+            string patron = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
 
+            return Regex.IsMatch(email, patron);
         }
+
+        public static void ValidarPassword(string pass)
+        {
+            if (!FormatoPass(pass))
+            {
+                throw new Exception("El Formato de la contraseña no es valido");
+            }
+        }
+
+        private static bool FormatoPass(string pass)
+        {
+            // Define una expresión regular que cumple con los requisitos.
+            //asumimos contrase;a largo entre 8 y 12 caracteres, que contenga una min, una may, un numero y un caracter especial; 
+            string patron = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,12}$";
+            return Regex.IsMatch(pass, patron);
+        }
+
+
 
 
     }

@@ -34,11 +34,17 @@ namespace Obligatorio1
 
         public void Validar()
         {
-            ValidarMiembros();
+            ValidarMiembros(MiembroSolicitado, MiembroSolicitante);
+            ValidarEstado(Estado);
 
         }
 
-        public static void ValidarMiembros()
+        public static void ValidarMiembros(Miembro miembroSolicitado, Miembro miembroSolicitante)
+        {
+
+        }
+
+        public static void ValidarEstado(string estado)
         {
 
         }
