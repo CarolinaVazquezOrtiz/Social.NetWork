@@ -20,15 +20,16 @@ namespace Obligatorio1
         
         private List<Miembro> _listaAmigos = new List<Miembro>();
 
-        public Miembro(string email, string password, bool isAdmin, string nombre, string apellido, DateTime fechaNac, bool bloqueado)
+        public Miembro(string email, string password, bool isAdmin, string nombre, string apellido, DateTime fechaNac)
         :base(email,password,isAdmin)
         {
             Nombre = nombre;
             Apellido = apellido;
             FechaNac = fechaNac;
-            Bloqueado = bloqueado;
+            Bloqueado = false;
             ValidarMiembro();
         }
+
 
         public void ValidarMiembro()
         {

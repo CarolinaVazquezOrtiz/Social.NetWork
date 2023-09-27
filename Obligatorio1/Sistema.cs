@@ -77,33 +77,115 @@ namespace Obligatorio1
         //END LOGIN USUARIO
 
 
-        //CREAR NUEVO MIEMBRO
+        //P1) CREAR NUEVO MIEMBRO
         public string CrearNuevoMiembro(Miembro miembro)
         {
-            Usuario.ValidarEmail(miembro.Email);
-            if (ExisteEmail(miembro.Email))
+            if (miembro == null)
             {
-                throw new Exception("El email que ingreso ya existe! Intente nuevamente");
+                throw new Exception("El mimebro recibido esta vacio.");
             }
-            Usuario.ValidarPassword(miembro.Password);
+            if (_listaUsuarios.Contains(miembro))
+            {
+                throw new Exception($"El miembro ya existe.");
+            }
+            miembro.ValidarMiembro();
             _listaUsuarios.Add(miembro);
-            return "Se creo el mimebro correctamente!";
+            return "Se creo el miembro correctamente";
         }
-        //END CREAR NUEVO MIEMBRO
+        //END P1) CREAR NUEVO MIEMBRO
 
 
         //CREAR NUEVO ADMINISTRADOR
         public string CrearNuevoAdministrador(Administrador administrador)
         {
-            Usuario.ValidarEmail(administrador.Email);
-            if (ExisteEmail(administrador.Email))
+            if (administrador == null)
             {
-                throw new Exception("El email que ingreso ya existe! Intente nuevamente");
+                throw new Exception("El admin recibido esta vacio.");
             }
-            Usuario.ValidarPassword(administrador.Password);
+            if (_listaUsuarios.Contains(administrador))
+            {
+                throw new Exception($"El admin ya existe.");
+            }
+            administrador.ValidarAdmin();
             _listaUsuarios.Add(administrador);
-            return "Se creo el mimebro correctamente!";
+            return "Se creo el miembro correctamente";
         }
         //END CREAR NUEVO ADMINISTRADOR
+
+
+        // FUNCIONALIDAD ADMINSTRADOR
+        public void AdministradorBloquear(Miembro miembro)
+        {
+            
+        }
+
+        public void AdministradorDesbloquear(Miembro miembro)
+        {
+
+        }
+
+        public void CensurarComentario(Publicacion publicacion)
+        {
+
+        }
+
+        public void HabilitarComentario(Publicacion publicacion)
+        {
+
+        }
+
+        // END FUNCIONALIDAD ADMINISTRADOR
+
+
+
+
+        //P2) listar todas las publicaciones de un MIEMBRO   -------revisar----
+        public string ListarPublicaciones(String mail)
+        {
+            Usuario.ValidarEmail(mail);
+            Miembro? miembro = null;
+            String mensaje = "";
+
+            foreach (Miembro miem in _listaUsuarios)
+            {
+                if (miem.Email.Contains(mail))
+                {
+                    miembro = miem;
+                    break;
+                }
+            }
+
+            if (miembro != null)
+            {
+                mensaje=$"Publicaciones de {miembro.Email}:";
+
+                foreach (Publicacion publicacion in _listaPubicaciones)
+                {
+                    if (publicacion.Miembro == miembro)
+                    {
+                        if (publicacion is Post)
+                        {
+                            mensaje += $"Post: {publicacion.Titulo}";
+                        }
+                        else if (publicacion is Comentario)
+                        {
+                            mensaje += $"Comentario: {publicacion.Contenido}";
+                        }
+                    }
+                }
+            }
+
+            //if (mensaje=Empty)
+            //{
+
+            //}
+
+            return mensaje;
+
+        }
+        //END P2) listar todas las publicaciones de un MIEMBRO
+
+
+
     }
 }

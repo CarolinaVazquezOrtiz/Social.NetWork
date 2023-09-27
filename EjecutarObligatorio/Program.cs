@@ -26,7 +26,7 @@ namespace EjecutarObligatorio
                 switch (opcion)
                 {
                     case 1:
-                        //RegistrarMiembro();
+                        RegistrarMiembro();
                         break;
                     case 2:
                         break;
@@ -35,7 +35,7 @@ namespace EjecutarObligatorio
             } while (opcion != 0);
         }
 
-        static private int PedirNumero()
+        private static int PedirNumero()
         {
             int numero = 0;
             bool salir = false;
@@ -56,7 +56,47 @@ namespace EjecutarObligatorio
             return numero;
         }
 
+        public static void RegistrarMiembro()
+        {
+            try
+            {
+                Console.WriteLine("Ingrese el Nombre del Miembro:");
+                string nombre = Console.ReadLine();
 
+                Console.WriteLine("Ingrese el Apellido del Miembro:");
+                string apellido = Console.ReadLine();
+
+                Console.WriteLine("Por favor, ingresa tu fecha de nacimiento:");
+
+                Console.Write("Día (1-31): ");
+                int dia = int.Parse(Console.ReadLine());
+
+                Console.Write("Mes (1-12): ");
+                int mes = int.Parse(Console.ReadLine());
+
+                Console.Write("Año (ej. 1990): ");
+                int año = int.Parse(Console.ReadLine());
+
+                DateTime fechaNacimiento = new DateTime(año, mes, dia);
+
+                Console.WriteLine("Ingrese el email del Miembro:");
+                string email = Console.ReadLine();
+
+                Console.WriteLine("Ingrese la password del Miembro:");
+                string password = Console.ReadLine();
+
+                Miembro nuevoMiembro = new Miembro(email, password, false, nombre, apellido, fechaNacimiento);
+                string mensaje=unSistema.CrearNuevoMiembro(nuevoMiembro);
+                Console.WriteLine(mensaje);
+                Console.ReadKey();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
+            }
+        }
 
     }
 }

@@ -34,7 +34,7 @@ namespace Obligatorio1
         {
             ValidarContenido(Contenido);
             ValidarTitulo(Titulo);
-            ValidarMiembro(Miembro);
+            //ValidarMiembro(Miembro);
         }
 
         //no vacío
@@ -55,19 +55,19 @@ namespace Obligatorio1
             }
         }
 
-        public static bool ValidarMiembro(Miembro miembro)
-        {
-            bool existe = false;
-            foreach (Usuario miem in Sistema.ListaUsuarios)        //esta bien??? Publicacion no conoce a Sistema
-            {
-                if (!miem.isAdmin)
-                {
-                    existe = true;
-                    break;
-                }
-            }
-            return existe;
-        }
+        //public static bool ValidarMiembro(Miembro miembro)
+        //{
+        //    bool existe = false;
+        //    foreach (Usuario miem in Sistema.ListaUsuarios)        //esta bien??? Publicacion no conoce a Sistema
+        //    {
+        //        if (!miem.isAdmin)
+        //        {
+        //            existe = true;
+        //            break;
+        //        }
+        //    }
+        //    return existe;
+        //}
 
 
 

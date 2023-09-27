@@ -18,25 +18,7 @@ namespace Obligatorio1
             base.Validar();
         }
 
-        public void AdministradorBloquear()
-        {
-
-        }
-
-        public void AdministradorDesbloquear()
-        {
-
-        }
-
-        public void CensurarComentario()
-        {
-
-        }
-
-        public void HabilitarComentario()
-        {
-
-        }
+        
 
     }
 }

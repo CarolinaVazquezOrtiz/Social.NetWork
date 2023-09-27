@@ -8,7 +8,6 @@ namespace Obligatorio1
 {
     public class Post:Publicacion
     {
-        //public class Jornalero:Cargo
         public string Img { get; set; }
 
         public string Estado { get; set; }
