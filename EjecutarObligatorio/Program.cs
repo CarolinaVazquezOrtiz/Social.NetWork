@@ -7,7 +7,7 @@ namespace EjecutarObligatorio
     {
         private static Sistema unSistema = new Sistema();
         //Precarga de datos
-        Precargar();
+        //Precargar();
 
         static void Main(string[] args)
         {
@@ -130,7 +130,7 @@ namespace EjecutarObligatorio
 
                 if (listaPubMiembro.Count == 0)
                 {
-                    Console.WriteLine("No existen Publicaciones")
+                    Console.WriteLine("No existen Publicaciones");
                 }
                 else
                 {

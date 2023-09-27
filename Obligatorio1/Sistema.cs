@@ -35,12 +35,12 @@ namespace Obligatorio1
         {
             Usuario usuario1 = new Miembro("caro19@gmail.com","Estrellas-19",false,"Carolina","Vazquez", new DateTime(1991, 10, 10) );
             CrearNuevoMiembro(usuario1);
-            Usuario usuario2 = new Miembro("sofia88@gmail.com","Lunas-88",false,"Sofia","Ortiz",1988/10/03);
-            CrearNuevoMiembro(usuario2);
+            Usuario usuario2 = new Miembro("sofia88@gmail.com","Lunas-88",false,"Sofia","Ortiz", new DateTime(1988, 10, 03) );
+            CrearNuevoMiembro(usuario2); 
         }
         public void PrecargarAdministradores()
         {
-            Usuario admin1 = new Administrador("guille77@gmail.com", "Pluton-77", true, "Guillermo","Plisich", new DateTime(1997,3,3) );
+            Usuario admin1 = new Administrador("guille77@gmail.com", "Pluton-77", true);
             CrearNuevoAdministrador(admin1);
         }
         public void PrecargarInvitaciones()
