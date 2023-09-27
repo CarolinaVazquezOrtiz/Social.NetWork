@@ -58,7 +58,7 @@ namespace Obligatorio1
         public static bool ValidarMiembro(Miembro miembro)
         {
             bool existe = false;
-            foreach (Usuario miem in Sistema.ListaUsuarios)        //esta bien????
+            foreach (Usuario miem in Sistema.ListaUsuarios)        //esta bien??? Publicacion no conoce a Sistema
             {
                 if (!miem.isAdmin)
                 {

@@ -11,7 +11,11 @@ namespace Obligatorio1
         public Administrador(string email, string password, bool isAdmin)
         :base(email,password,isAdmin) 
         {
-
+            ValidarAdmin();
+        }
+        public void ValidarAdmin()
+        {
+            base.Validar();
         }
 
         public void AdministradorBloquear()

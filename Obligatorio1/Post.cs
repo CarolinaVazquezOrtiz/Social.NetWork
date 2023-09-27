@@ -8,7 +8,7 @@ namespace Obligatorio1
 {
     public class Post:Publicacion
     {
-
+        //public class Jornalero:Cargo
         public string Img { get; set; }
 
         public string Estado { get; set; }
@@ -27,8 +27,8 @@ namespace Obligatorio1
 
         public void ValidarPost()
         {
+            base.Validar();
             ValidarImagen(Img);
-
         }
 
         //no vacío y debe terminar en “.jpg” o “.png”
