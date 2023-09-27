@@ -20,7 +20,46 @@ namespace Obligatorio1
         public  List<Publicacion> ListaPublicaciones { get { return _listaPubicaciones; } }
         public  List<Reaccion> ListaReacciones { get { return _listaReacciones; } }
 
+        //-------------PRECARGA DE DATOS------------
+        public void Precargas()
+        {
+            PrecargarMiembros();
+            PrecargarAdministradores();
+            PrecargarInvitaciones();
+            PrecargarPosts();
+            PrecargarComentarios();
+            PrecargarReacciones();
+        }
 
+        public void PrecargarMiembros()
+        {
+            Usuario usuario1 = new Miembro("caro19@gmail.com","Estrellas-19",false,"Carolina","Vazquez", new DateTime(1991, 10, 10) );
+            CrearNuevoMiembro(usuario1);
+            Usuario usuario2 = new Miembro("sofia88@gmail.com","Lunas-88",false,"Sofia","Ortiz", new DateTime(1988, 10, 03) );
+            CrearNuevoMiembro(usuario2); 
+        }
+        public void PrecargarAdministradores()
+        {
+            Usuario admin1 = new Administrador("guille77@gmail.com", "Pluton-77", true);
+            CrearNuevoAdministrador(admin1);
+        }
+        public void PrecargarInvitaciones()
+        {
+
+        }
+        public void PrecargarPosts()
+        {
+
+        }
+        public void PrecargarComentarios()
+        {
+
+        }
+        public void PrecargarReacciones()
+        {
+
+        }
+        //END -------------PRECARGA DE DATOS------------
 
         //LOGIN USUARIO
         public string Login(string email, string pass)
@@ -82,7 +121,7 @@ namespace Obligatorio1
         {
             if (miembro == null)
             {
-                throw new Exception("El mimebro recibido esta vacio.");
+                throw new Exception("El miembro recibido esta vacio.");
             }
             if (_listaUsuarios.Contains(miembro))
             {
@@ -139,16 +178,16 @@ namespace Obligatorio1
 
 
 
-        //P2) listar todas las publicaciones de un MIEMBRO   -------revisar----
-        public string ListarPublicaciones(String mail)
+        //P2) listar todas las publicaciones de un MIEMBRO  
+        public List<Publicacion> ListarPubicaciones(String mail)
         {
             Usuario.ValidarEmail(mail);
+            List<Publicacion> listaAux = new List<Publicacion>();
             Miembro? miembro = null;
-            String mensaje = "";
 
             foreach (Miembro miem in _listaUsuarios)
             {
-                if (miem.Email.Contains(mail))
+                if (miem.Email == mail)
                 {
                     miembro = miem;
                     break;
@@ -157,31 +196,21 @@ namespace Obligatorio1
 
             if (miembro != null)
             {
-                mensaje=$"Publicaciones de {miembro.Email}:";
-
-                foreach (Publicacion publicacion in _listaPubicaciones)
+                foreach (Publicacion unapub in _listaPubicaciones)
                 {
-                    if (publicacion.Miembro == miembro)
+                    if (unapub.Miembro == miembro)
                     {
-                        if (publicacion is Post)
-                        {
-                            mensaje += $"Post: {publicacion.Titulo}";
-                        }
-                        else if (publicacion is Comentario)
-                        {
-                            mensaje += $"Comentario: {publicacion.Contenido}";
-                        }
+                        listaAux.Add(unapub);
                     }
                 }
             }
 
-            //if (mensaje=Empty)
-            //{
+            if (miembro == null)
+            {
+                throw new Exception("Miembro no existe");
+            }
 
-            //}
-
-            return mensaje;
-
+            return listaAux;
         }
         //END P2) listar todas las publicaciones de un MIEMBRO
 
