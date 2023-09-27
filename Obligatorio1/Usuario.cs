@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Obligatorio1
 {
-    public class Usuario
+    public abstract class Usuario
     {
         //Datos
         public string Email { get; set; }

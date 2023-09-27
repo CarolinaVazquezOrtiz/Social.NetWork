@@ -27,10 +27,10 @@ namespace Obligatorio1
             Apellido = apellido;
             FechaNac = fechaNac;
             Bloqueado = bloqueado;
-            ValidarMiembro();
+            Validar();
         }
 
-        public void ValidarMiembro()
+        public override void Validar()
         {
             if (string.IsNullOrWhiteSpace(Nombre))
             {
