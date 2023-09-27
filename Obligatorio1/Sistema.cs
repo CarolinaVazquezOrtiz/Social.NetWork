@@ -186,6 +186,7 @@ namespace Obligatorio1
         //END P2) listar todas las publicaciones de un MIEMBRO
 
 
-
+        //P3) listar todas los post haya realizado comentarios   -------revisar----
+        //END P3) listar todas las publicaciones de un MIEMBRO
     }
 }

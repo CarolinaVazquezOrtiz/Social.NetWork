@@ -66,18 +66,8 @@ namespace EjecutarObligatorio
                 Console.WriteLine("Ingrese el Apellido del Miembro:");
                 string apellido = Console.ReadLine();
 
-                Console.WriteLine("Por favor, ingresa tu fecha de nacimiento:");
-
-                Console.Write("Día (1-31): ");
-                int dia = int.Parse(Console.ReadLine());
-
-                Console.Write("Mes (1-12): ");
-                int mes = int.Parse(Console.ReadLine());
-
-                Console.Write("Año (ej. 1990): ");
-                int año = int.Parse(Console.ReadLine());
-
-                DateTime fechaNacimiento = new DateTime(año, mes, dia);
+                Console.WriteLine("Por favor, ingresa tu fecha de nacimiento (yyyy-MM-dd):");
+                DateTime.TryParse(Console.ReadLine(), out DateTime fechaNacimiento);
 
                 Console.WriteLine("Ingrese el email del Miembro:");
                 string email = Console.ReadLine();

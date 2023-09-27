@@ -8,11 +8,14 @@ namespace Obligatorio1
 {
     public class Comentario:Publicacion
     {
-        public bool EsPrivado;
+        public bool EsPrivado { get; set; }
 
-        public Comentario(string contenido, DateTime fecha, Miembro miembro, string titulo,bool esPrivado)
+        public Post Post { get; set; }
+
+        public Comentario(Post post,string contenido, DateTime fecha, Miembro miembro, string titulo,bool esPrivado)
         :base(contenido,fecha,miembro,titulo)
         {
+            Post = post;
             EsPrivado = esPrivado;
         }
 
