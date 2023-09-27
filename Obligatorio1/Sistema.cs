@@ -78,25 +78,32 @@ namespace Obligatorio1
 
 
         //CREAR NUEVO MIEMBRO
-        public string CrearNuevoMiembro(string email, string password, string nombre, string apellido, DateTime fechNac)
+        public string CrearNuevoMiembro(Miembro miembro)
         {
-
-            Usuario.ValidarEmail(email);
-            if (ExisteEmail(email))
+            Usuario.ValidarEmail(miembro.Email);
+            if (ExisteEmail(miembro.Email))
             {
                 throw new Exception("El email que ingreso ya existe! Intente nuevamente");
             }
-            Usuario.ValidarPassword(password);
-            Miembro nuevo = new Miembro(email,password,false,nombre,apellido,fechNac,false);
-            _listaUsuarios.Add(nuevo);
+            Usuario.ValidarPassword(miembro.Password);
+            _listaUsuarios.Add(miembro);
             return "Se creo el mimebro correctamente!";
-
         }
         //END CREAR NUEVO MIEMBRO
 
 
-        //CREAR NUEVO MIEMBRO
-
-        //END CREAR NUEVO MIEMBRO
+        //CREAR NUEVO ADMINISTRADOR
+        public string CrearNuevoAdministrador(Administrador administrador)
+        {
+            Usuario.ValidarEmail(administrador.Email);
+            if (ExisteEmail(administrador.Email))
+            {
+                throw new Exception("El email que ingreso ya existe! Intente nuevamente");
+            }
+            Usuario.ValidarPassword(administrador.Password);
+            _listaUsuarios.Add(administrador);
+            return "Se creo el mimebro correctamente!";
+        }
+        //END CREAR NUEVO ADMINISTRADOR
     }
 }

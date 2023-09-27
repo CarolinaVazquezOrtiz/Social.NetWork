@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Obligatorio1
 {
-    public class Usuario
+    public abstract class Usuario
     {
         //Datos
         public string Email { get; set; }
@@ -61,8 +61,6 @@ namespace Obligatorio1
             string patron = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,12}$";
             return Regex.IsMatch(pass, patron);
         }
-
-
 
 
     }

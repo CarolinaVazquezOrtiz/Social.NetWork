@@ -28,6 +28,7 @@ namespace Obligatorio1
             FechaNac = fechaNac;
             Bloqueado = bloqueado;
             ValidarMiembro();
+            base.Validar();
         }
 
         public void ValidarMiembro()
@@ -42,5 +43,7 @@ namespace Obligatorio1
             }
         }
         
+
+
     }
 }
