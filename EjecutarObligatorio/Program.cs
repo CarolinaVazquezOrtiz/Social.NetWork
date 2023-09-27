@@ -1,10 +1,14 @@
 ﻿using Obligatorio1;
+using System.Security.Cryptography.X509Certificates;
 
 namespace EjecutarObligatorio
 {
     public class Program
     {
         private static Sistema unSistema = new Sistema();
+        //Precarga de datos
+        Precargar();
+
         static void Main(string[] args)
         {
             //---menú en consola---
@@ -35,6 +39,20 @@ namespace EjecutarObligatorio
             } while (opcion != 0);
         }
 
+        private static void Precargar()
+        {
+            try
+            {
+                unSistema.Precargas();
+                Console.WriteLine("Precarga de datos correcta");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            Console.ReadKey();
+        }
+
         private static int PedirNumero()
         {
             int numero = 0;
@@ -56,6 +74,7 @@ namespace EjecutarObligatorio
             return numero;
         }
 
+        //Opc 1 - Registrar miembro
         public static void RegistrarMiembro()
         {
             try
@@ -90,6 +109,44 @@ namespace EjecutarObligatorio
                 Console.WriteLine(mensaje);
                 Console.ReadKey();
 
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
+            }
+        }
+
+        /*Opc 2 - Dado un email de miembro listar todas las publicaciones que ha realizado, diferenciando en
+        la lista su tipo(si es post o comentario)   */
+        public static void ListarPubicacionesProgram()
+        {
+            try
+            {
+                Console.WriteLine("Ingrese el Mail del Miembro:");
+                string email = Console.ReadLine();
+
+                List<Publicacion> listaPubMiembro = unSistema.ListarPubicaciones(email);
+
+                if (listaPubMiembro.Count == 0)
+                {
+                    Console.WriteLine("No existen Publicaciones")
+                }
+                else
+                {
+                    foreach (Publicacion pub in listaPubMiembro)
+                    {
+                        if (pub is Post)
+                        {
+                            Console.WriteLine($"Post de fecha {pub.Fecha}; Título {pub.Titulo}; texto: {pub.Contenido}");
+                        }
+                        if (pub is Comentario)
+                        {
+                            Console.WriteLine($"Comentario de fecha {pub.Fecha}; Título {pub.Titulo}; texto: {pub.Contenido}");
+                        }
+                    }
+                }
+                Console.ReadKey();
             }
             catch (Exception e)
             {
