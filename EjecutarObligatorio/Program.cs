@@ -24,6 +24,7 @@ namespace EjecutarObligatorio
                     "3-Listar posts de un miembro\n" +
                     "4-Listar posts entre 2 fechas\n" +
                     "5-Ver miembros con más publicaciones \n\n" +
+                    "6-Precargar datos \n\n" +
                     "0-salir \n");
                 Console.ResetColor();
                 opcion = PedirNumero();
@@ -34,6 +35,9 @@ namespace EjecutarObligatorio
                         break;
                     case 2:
                         ListarPubicacionesProgram();
+                        break;
+                    case 6:
+                        Precargar();
                         break;
                 }
 

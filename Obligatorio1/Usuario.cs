@@ -50,7 +50,7 @@ namespace Obligatorio1
         {
             if (!FormatoPass(pass))
             {
-                throw new Exception("El Formato de la contraseña no es valido");
+                throw new Exception ($"El Formato de la contraseña {pass} no es valido ");
             }
         }
 
@@ -58,7 +58,7 @@ namespace Obligatorio1
         {
             // Define una expresión regular que cumple con los requisitos.
             //asumimos contrase;a largo entre 8 y 12 caracteres, que contenga una min, una may, un numero y un caracter especial; 
-            string patron = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,12}$";
+            string patron = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!*._-]).{8,12}$";
             return Regex.IsMatch(pass, patron);
         }
 

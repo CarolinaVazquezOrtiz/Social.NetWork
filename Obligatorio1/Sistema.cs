@@ -33,7 +33,7 @@ namespace Obligatorio1
 
         public void PrecargarMiembros()
         {
-            Miembro miembro1 = new Miembro("caro19@gmail.com", "Estrellas-19", false, "Carolina", "Vazquez", new DateTime(1991, 10, 10));
+            Miembro miembro1 = new Miembro("caro19@gmail.com", "Estrella-1", false, "Carolina", "Vazquez", new DateTime(1991, 10, 10));
             CrearNuevoMiembro(miembro1);
             Miembro miembro2 = new Miembro("sofia88@gmail.com", "Lunas-88", false, "Sofia", "Ortiz", new DateTime(1988, 10, 03));
             CrearNuevoMiembro(miembro2);
@@ -116,7 +116,7 @@ namespace Obligatorio1
         public void PrecargarPosts()    ///------------> TERMINAR CV --------
         {
             Post post1 = new Post("vacaciones en Miami", new DateTime(2022, 08, 08), _listaUsuarios[0] as Miembro, "primavera en USA", "img.jpg", "publico", false);
-            //CrearNuevoPost(post1);
+            CrearNuevoPost(post1);
         }
         public void PrecargarComentarios()
         {
@@ -211,6 +211,19 @@ namespace Obligatorio1
             _listaInvitaciones.Add(invitacion);
         }
         //END CREAR NUEVA INVITACION
+
+        //CREAR NUEVO POST
+        public void CrearNuevoPost(Post post)
+        {
+            if (_listaPubicaciones.Contains(post))
+            {
+                throw new Exception($"El Post ya fue publicado");
+            }
+            post.ValidarPost();
+            _listaPubicaciones.Add(post);
+        }
+        //END CREAR NUEVO POST
+        
 
 
         // FUNCIONALIDAD ADMINSTRADOR
