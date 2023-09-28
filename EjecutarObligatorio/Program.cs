@@ -33,6 +33,7 @@ namespace EjecutarObligatorio
                         RegistrarMiembro();
                         break;
                     case 2:
+                        ListarPubicacionesProgram();
                         break;
                 }
 

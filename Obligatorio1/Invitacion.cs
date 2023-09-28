@@ -18,9 +18,9 @@ namespace Obligatorio1
 
         public string Estado { get; set; }
 
-        public string FechaSolicitud { get; set; }
+        public DateTime FechaSolicitud { get; set; }
 
-        public Invitacion(Miembro miembroSolicitado, Miembro miembroSolicitante, string estado, string fechaSolicitud)
+        public Invitacion(Miembro miembroSolicitado, Miembro miembroSolicitante, string estado, DateTime fechaSolicitud)
         {
 
             Id = ++autID;
@@ -32,7 +32,7 @@ namespace Obligatorio1
             
         }
 
-        public void Validar()
+        public void ValidarInvitacion()
         {
             ValidarMiembros(MiembroSolicitado, MiembroSolicitante);
             ValidarEstado(Estado);

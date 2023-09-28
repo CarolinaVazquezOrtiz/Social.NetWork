@@ -12,7 +12,7 @@ namespace Obligatorio1
 
         public Post Post { get; set; }
 
-        public Comentario(Post post,string contenido, DateTime fecha, Miembro miembro, string titulo,bool esPrivado)
+        public Comentario(Post post, string contenido, DateTime fecha, Miembro miembro, string titulo,bool esPrivado)
         :base(contenido,fecha,miembro,titulo)
         {
             Post = post;
