@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace Obligatorio1
 {
@@ -112,19 +107,77 @@ namespace Obligatorio1
             CrearNuevaInvitacion(invita21);
         }
 
-
-        public void PrecargarPosts()    ///------------> TERMINAR CV --------
+        ///NOTA: Algunos datos de estos post, fueron generados por ChatGPT y modificados 
+        public void PrecargarPosts()    
         {
-            Post post1 = new Post("vacaciones en Miami", new DateTime(2022, 08, 08), _listaUsuarios[0] as Miembro, "primavera en USA", "img.jpg", "publico", false);
+            //Post [0]
+            Post post1 = new Post("vacaciones en Miami", new DateTime(2018, 08, 08), _listaUsuarios[0] as Miembro, "primavera en USA", "img.jpg", "privado", false);
             CrearNuevoPost(post1);
+            //Post [1]
+            Post post2 = new Post("Recuerdos de París", new DateTime(2019, 06, 15), _listaUsuarios[1] as Miembro, "Días inolvidables en la Ciudad del Amor. 💖", "paris.jpg", "publico", false);
+            CrearNuevoPost(post2);
+            //Post [2]
+            Post post3 = new Post("Aventuras en Tailandia", new DateTime(2020, 07, 25), _listaUsuarios[2] as Miembro, "Explorando la belleza de Tailandia. 🌴🌞", "tailandia.jpg", "publico", false);
+            CrearNuevoPost(post3);
+            //Post [3]
+            Post post4 = new Post("Excursión a Machu Picchu", new DateTime(2021, 09, 10), _listaUsuarios[3] as Miembro, "Un sueño hecho realidad en las alturas de Perú. 🏞️", "machupicchu.jpg", "publico", false);
+            CrearNuevoPost(post4);
+            //Post [4]
+            Post post5 = new Post("Noche de concierto en Nueva York", new DateTime(2022, 07, 03), _listaUsuarios[4] as Miembro, "Vibrando al ritmo de la Gran Manzana. 🎶🗽", "nyconcert.jpg", "publico", false);
+            CrearNuevoPost(post5);
         }
+
+        ///NOTA: Generados por ChatGPT 
         public void PrecargarComentarios()
         {
-
+            //Post [0]
+            Comentario comentario1 = new Comentario(_listaPubicaciones[0] as Post, "¡Wow, esta foto es simplemente impresionante! 😍", new DateTime(2023, 01, 08), _listaUsuarios[1] as Miembro, "foto divi", false);
+            CrearNuevoComentario(comentario1);
+            Comentario comentario2 = new Comentario(_listaPubicaciones[0] as Post, "¡¿Dónde tomaste esta increíble imagen? 😮", new DateTime(2023, 01, 09), _listaUsuarios[1] as Miembro, "foton", false);
+            CrearNuevoComentario(comentario2);
+            Comentario comentario3 = new Comentario(_listaPubicaciones[0] as Post, "¡Qué lugar tan hermoso! Me encantaría visitarlo algún día. 🌴☀️", new DateTime(2023, 02, 08), _listaUsuarios[1] as Miembro, "hermoso", false);
+            CrearNuevoComentario(comentario3);
+            //Post [1]
+            Comentario comentario4 = new Comentario(_listaPubicaciones[1] as Post, "La naturaleza siempre nos sorprende con su belleza. 🍃💖", new DateTime(2023, 03, 08), _listaUsuarios[2] as Miembro, "belleza", false);
+            CrearNuevoComentario(comentario4);
+            Comentario comentario5 = new Comentario(_listaPubicaciones[1] as Post, "No puedo evitar envidiar tu talento para la fotografía. 📷💫", new DateTime(2023, 04, 08), _listaUsuarios[2] as Miembro, "talentoso", false);
+            CrearNuevoComentario(comentario5);
+            Comentario comentario6 = new Comentario(_listaPubicaciones[1] as Post, "Esa puesta de sol es simplemente mágica. ✨🌅", new DateTime(2023, 04, 08), _listaUsuarios[2] as Miembro, "magic", false);
+            CrearNuevoComentario(comentario6);
+            //Post [2]
+            Comentario comentario7 = new Comentario(_listaPubicaciones[2] as Post, "Qué foto tan relajante! Me hace sentir en paz. 🌿🌊", new DateTime(2023, 03, 08), _listaUsuarios[1] as Miembro, "peace", false);
+            CrearNuevoComentario(comentario7);
+            Comentario comentario8 = new Comentario(_listaPubicaciones[2] as Post, "Estoy obsesionado/a con tus fotos, siempre son asombrosas. 📸👏", new DateTime(2023, 04, 08), _listaUsuarios[1] as Miembro, "awesome", false);
+            CrearNuevoComentario(comentario8);
+            Comentario comentario9 = new Comentario(_listaPubicaciones[2] as Post, "Esa sonrisa tuya ilumina la foto. 😄💕", new DateTime(2023, 04, 08), _listaUsuarios[1] as Miembro, "smile", false);
+            CrearNuevoComentario(comentario9);
+            //Post [3]
+            Comentario comentario10 = new Comentario(_listaPubicaciones[3] as Post, "¡Estás viviendo la vida al máximo! 🙌", new DateTime(2023, 03, 08), _listaUsuarios[1] as Miembro, "max", false);
+            CrearNuevoComentario(comentario10);
+            Comentario comentario11 = new Comentario(_listaPubicaciones[3] as Post, "¿Cuál es el secreto para verte tan bien en todas tus fotos? 😁", new DateTime(2023, 04, 08), _listaUsuarios[1] as Miembro, "divi", false);
+            CrearNuevoComentario(comentario11);
+            Comentario comentario12 = new Comentario(_listaPubicaciones[3] as Post, "Esta imagen me transporta a otro mundo. 🚀🌌", new DateTime(2023, 04, 08), _listaUsuarios[1] as Miembro, "mundo", false);
+            CrearNuevoComentario(comentario12);
+            //Post [4]
+            Comentario comentario13 = new Comentario(_listaPubicaciones[4] as Post, "La naturaleza siempre nos sorprende con su belleza. 🍃💖", new DateTime(2023, 03, 08), _listaUsuarios[3] as Miembro, "belleza", false);
+            CrearNuevoComentario(comentario13);
+            Comentario comentario14 = new Comentario(_listaPubicaciones[4] as Post, "No puedo evitar envidiar tu talento para la fotografía. 📷💫", new DateTime(2023, 04, 08), _listaUsuarios[3] as Miembro, "talentoso", false);
+            CrearNuevoComentario(comentario14);
+            Comentario comentario15 = new Comentario(_listaPubicaciones[4] as Post, "No puedo evitar envidiar tu talento para la fotografía. 📷💫", new DateTime(2023, 04, 08), _listaUsuarios[3] as Miembro, "talentoso", false);
+            CrearNuevoComentario(comentario15);
         }
-        public void PrecargarReacciones()
+        public void PrecargarReacciones() //like o dislike
         {
-
+            //reacciones a Post
+            Reaccion reaccion1 = new Reaccion("like", _listaUsuarios[1] as Miembro, _listaPubicaciones[0] as Post);
+            CrearNuevaReaccion(reaccion1);
+            Reaccion reaccion2 = new Reaccion("like", _listaUsuarios[1] as Miembro, _listaPubicaciones[2] as Post);
+            CrearNuevaReaccion(reaccion2);
+            //reacciones a Comentarios
+            Reaccion reaccion3 = new Reaccion("like", _listaUsuarios[2] as Miembro, _listaPubicaciones[3] as Post);
+            CrearNuevaReaccion(reaccion3);
+            Reaccion reaccion4 = new Reaccion("dislike", _listaUsuarios[3] as Miembro, _listaPubicaciones[4] as Post);
+            CrearNuevaReaccion(reaccion4);
         }
         //END -------------PRECARGA DE DATOS------------
 
@@ -223,7 +276,30 @@ namespace Obligatorio1
             _listaPubicaciones.Add(post);
         }
         //END CREAR NUEVO POST
-        
+
+        //CREAR NUEVO COMENTARIO
+        public void CrearNuevoComentario(Comentario coment)
+        {
+            if (_listaPubicaciones.Contains(coment))
+            {
+                throw new Exception($"El Comentario ya fue publicado");
+            }
+            coment.ValidarComentario();
+            _listaPubicaciones.Add(coment);
+        }
+        //END CREAR NUEVO COMENTARIO
+
+        //CREAR NUEVA REACCION
+        public void CrearNuevaReaccion(Reaccion react)
+        {
+            if (_listaReacciones.Contains(react))
+            {
+                throw new Exception($"Ya existe reaccion");
+            }
+            react.ValidarReaccion();
+            _listaReacciones.Add(react);
+        }
+        //END CREAR NUEVA REACCION
 
 
         // FUNCIONALIDAD ADMINSTRADOR

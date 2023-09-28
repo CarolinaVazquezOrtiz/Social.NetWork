@@ -20,16 +20,27 @@ namespace Obligatorio1
             TipoReaccion = tipoReaccion;
             Miembro = miembro;
             PublicacionReaccionada = publicacionReaccionada;
+            ValidarReaccion();
         }
 
-        public void Validar()
+        //Un usuario puede poner un solo like/dislike por publicación.--------TERMINAR---------
+        public void ValidarReaccion()
         {
-            ValidarMiembro();
+            //ValidarMiembro(Miembro);
+            ValidarTipoReaccion();
         }
 
-        public static void ValidarMiembro()
+        public void ValidarTipoReaccion()
+        {
+            if (TipoReaccion.ToLower() != "like" && TipoReaccion.ToLower() != "dislike")
+            {
+                throw new Exception($"Tipo de reaccion: {TipoReaccion} no es valido");
+            }
+        }
+
+        /*public static void ValidarMiembro()
         {
 
-        }
+        }*/
     }
 }
