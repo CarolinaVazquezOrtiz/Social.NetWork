@@ -13,24 +13,26 @@ namespace EjecutarObligatorio
         {
             //---menú en consola---
             int opcion;
+            Precargar();
             do
             {
-                /*unSistema.Precargas();       -- REVISAR LO DE LA PRECARGA DEL SISTEMA, PORQUE AGARRA UNA EXCEPCION --
-                Console.Clear();*/      
+                Console.Clear();      
                 Console.BackgroundColor = ConsoleColor.DarkCyan;
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.WriteLine("Ingrese opcion: \n\n" +
                     "1-Registrar miembro\n" +
                     "2-Listar publicaciones de un miembro\n" +
-                    "3-Listar posts de un miembro\n" +
+                    "3-Listar posts de un miembro en los que haya realizado comentarios\n" +
                     "4-Listar posts entre 2 fechas\n" +
                     "5-Ver miembros con más publicaciones \n\n" +
-                    "6-Precargar datos \n\n" +
                     "0-salir \n");
                 Console.ResetColor();
                 opcion = PedirNumero();
-                switch (opcion)
+
+                if (opcion != 0)        //evita mostrar el mensaje por defecto si se ingresa 0 al iniciar
                 {
+                    switch (opcion)
+                    {
                     case 1:
                         RegistrarMiembro();
                         break;
@@ -44,9 +46,11 @@ namespace EjecutarObligatorio
                         break;
                     case 5:
                         break;
-                    case 6:
-                        Precargar();
+                    default:
+                        Console.WriteLine("Opción no válida. Ingrese un número del 1 al 5, o pulse 0 para salir");
+                        Console.ReadLine(); // Pausa para que el usuario pueda ver el mensaje de error
                         break;
+                    }
                 }
 
             } while (opcion != 0);
@@ -57,13 +61,11 @@ namespace EjecutarObligatorio
             try
             {
                 unSistema.Precargas();
-                Console.WriteLine("Precarga de datos correcta");
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
-            Console.ReadKey();
         }
 
         private static int PedirNumero()
@@ -75,7 +77,7 @@ namespace EjecutarObligatorio
                 try
                 {
                     salir = true;
-                    numero = int.Parse(Console.ReadLine());
+                    numero = int.Parse(LeerCampoNoVacio());
                 }
                 catch (Exception)
                 {
@@ -93,19 +95,19 @@ namespace EjecutarObligatorio
             try
             {
                 Console.WriteLine("Ingrese el Nombre del Miembro:");
-                string nombre = Console.ReadLine();
+                string nombre = LeerCampoNoVacio();
 
                 Console.WriteLine("Ingrese el Apellido del Miembro:");
-                string apellido = Console.ReadLine();
+                string apellido = LeerCampoNoVacio();
 
                 Console.WriteLine("Por favor, ingresa tu fecha de nacimiento (yyyy-MM-dd):");
-                DateTime.TryParse(Console.ReadLine(), out DateTime fechaNacimiento);
+                DateTime.TryParse(LeerCampoNoVacio(), out DateTime fechaNacimiento);
 
                 Console.WriteLine("Ingrese el email del Miembro:");
-                string email = Console.ReadLine();
+                string email = LeerCampoNoVacio();
 
                 Console.WriteLine("Ingrese la password del Miembro:");
-                string password = Console.ReadLine();
+                string password = LeerCampoNoVacio();
 
                 Miembro nuevoMiembro = new Miembro(email, password, false, nombre, apellido, fechaNacimiento);
                 string mensaje=unSistema.CrearNuevoMiembro(nuevoMiembro);
@@ -120,6 +122,22 @@ namespace EjecutarObligatorio
             }
         }
 
+        // Metodo para asegurarme que no dejen campos vacios 
+        public static string LeerCampoNoVacio()
+        {
+            string input;
+            do
+            {
+                input = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    Console.WriteLine("Este campo no puede quedar vacío. Ingrésalo nuevamente: ");
+                }
+            } while (string.IsNullOrWhiteSpace(input));
+
+            return input;
+        }
+
         /*Opc 2 - Dado un email de miembro listar todas las publicaciones que ha realizado, diferenciando en
         la lista su tipo(si es post o comentario)   */
         public static void ListarPubicacionesProgram()
@@ -127,7 +145,7 @@ namespace EjecutarObligatorio
             try
             {
                 Console.WriteLine("Ingrese el Mail del Miembro:");
-                string email = Console.ReadLine();
+                string email = LeerCampoNoVacio();
 
                 if (unSistema.ExisteEmail(email))
                 { 
@@ -172,7 +190,7 @@ namespace EjecutarObligatorio
             try
             {
                 Console.WriteLine("Ingrese el Mail del Miembro:");
-                string email = Console.ReadLine();
+                string email = LeerCampoNoVacio();
 
                 if (unSistema.ExisteEmail(email))
                 {
@@ -213,6 +231,8 @@ namespace EjecutarObligatorio
         /*Opc 5 - Obtener los miembros que hayan realizado más publicaciones de cualquier tipo. Si hay más
         de un miembro con la misma cantidad de publicaciones mostrarlos todos. Se mostrarán
         todos los datos de los miembros.  */
+
+
 
 
 
