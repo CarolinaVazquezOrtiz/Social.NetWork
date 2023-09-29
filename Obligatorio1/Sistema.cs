@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
@@ -260,14 +261,19 @@ namespace Obligatorio1
 
         //P2) listar todas las publicaciones de un MIEMBRO
 
-        public List<Publicacion> ListarPubicaciones(String mail)
+        public List<Publicacion> ListarPubicaciones(string email)
         {
             try
             {
-                Usuario.ValidarEmail(mail);
+                if (string.IsNullOrEmpty(email))
+                {
+                    throw new Exception("Hubo un error en el pasaje de datos del email");
+                }
+
+                Usuario.ValidarEmail(email);
                 List<Publicacion> listaAux = new List<Publicacion>();
 
-                Miembro? miembro = ObtenerMiembro(mail);
+                Miembro? miembro = ObtenerMiembro(email);
 
                 if (miembro != null)
                 {
@@ -281,7 +287,7 @@ namespace Obligatorio1
                 }
                 else
                 {
-                    throw new Exception("Miembro no existe");
+                    throw new Exception("El miembro no existe");
                 }
 
                 return listaAux;
@@ -296,14 +302,19 @@ namespace Obligatorio1
 
 
         //P3) listar todas los post haya realizado comentarios
-        public List<Post> ListarPost(String mail)
+        public List<Post> ListarPost(string email)
         {
             try
             {
-                Usuario.ValidarEmail(mail);
+                if (string.IsNullOrEmpty(email))
+                {
+                    throw new Exception("Hubo un error en el pasaje de datos del email");
+                }
+
+                Usuario.ValidarEmail(email);
                 List<Post> listaAux = new List<Post>();
 
-                Miembro? miembro = ObtenerMiembro(mail);
+                Miembro? miembro = ObtenerMiembro(email);
 
                 if (miembro != null)
                 {
@@ -311,11 +322,10 @@ namespace Obligatorio1
                     {
                         if (unPub.Miembro == miembro && unPub is Comentario)
                         {
-                            Comentario unComentario = unPub as Comentario;
+                            Comentario unComentario = (Comentario)unPub;
                             listaAux.Add(unComentario.Post);
                         }
                     }
-
                 }
                 else
                 {
@@ -327,7 +337,6 @@ namespace Obligatorio1
             }
             catch (Exception e)
             {
-
                 throw e;
             }
         }
@@ -335,31 +344,76 @@ namespace Obligatorio1
 
 
         // P4) Listar entre dos fechas todos los Posts
-        public List<Post> ListarPostPorFecha(DateTime fechaInicio, DateTime fechaFin)
+        public List<Post> ListarPostFecha(DateTime fechaInicio, DateTime fechaFin)
         {
-            
-            List<Post> listaAux = new List<Post>();
-
-            foreach (Publicacion unPub in _listaPubicaciones)
+            try
             {
-                if ((unPub.Fecha >= fechaInicio && unPub.Fecha <= fechaFin) && unPub is Post)
+                if (fechaInicio == DateTime.MinValue && fechaFin == DateTime.MinValue)
                 {
-                    Post unPost = unPub as Post;        //conviero a clase hija (Post)
-                    listaAux.Add(unPost);
+                    throw new Exception("Hubo un error en pasajes de fechas");
                 }
-            }
 
-            return listaAux;
+                List<Post> listaAux = new List<Post>();
+
+                foreach (Publicacion unPub in _listaPubicaciones)
+                {
+                    if (unPub is Post post && post.Fecha >= fechaInicio && post.Fecha <= fechaFin)
+                    {
+                        listaAux.Add(post);
+                    }
+                }
+
+                // Ordenar los posts por título en forma descendente usando una función de comparación lambda
+                listaAux.Sort((post1, post2) => string.Compare(post2.Titulo, post1.Titulo));
+
+
+                return listaAux;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
             
         }
+
+ 
         //END P4) listar todas los post haya realizado comentarios
 
 
         // P5) Obtener los miembros que haya realizado mas publicaciones de cualquier tipo
         //public List<Post> ListarMiembrosCantidadPublicacion()
         //{
+        //    // Calcular la cantidad de publicaciones de tipo Post y Comentario por miembro
+        //    Dictionary<Miembro, int> publicacionesPostPorMiembro = new Dictionary<Miembro, int>();
+        //    Dictionary<Miembro, int> publicacionesComentarioPorMiembro = new Dictionary<Miembro, int>();
 
+        //    foreach (Publicacion publicacion in _listaPubicaciones)
+        //    {
+        //        if (publicacion is Post)
+        //        {
+        //            if (publicacionesPostPorMiembro.ContainsKey(publicacion.Miembro))
+        //            {
+        //                publicacionesPostPorMiembro[publicacion.Miembro]++;
+        //            }
+        //            else
+        //            {
+        //                publicacionesPostPorMiembro[publicacion.Miembro] = 1;
+        //            }
+        //        }
+        //        else if (publicacion is Comentario)
+        //        {
+        //            if (publicacionesComentarioPorMiembro.ContainsKey(publicacion.Miembro))
+        //            {
+        //                publicacionesComentarioPorMiembro[publicacion.Miembro]++;
+        //            }
+        //            else
+        //            {
+        //                publicacionesComentarioPorMiembro[publicacion.Miembro] = 1;
+        //            }
+        //        }
+        //    }
         //}
+
         //END P5) Obtener los miembros que haya realizado mas publicaciones de cualquier tipo
 
         public Miembro ObtenerMiembro(string mail)

@@ -82,21 +82,41 @@ namespace EjecutarObligatorio
             {
                 Console.WriteLine("Ingrese el Nombre del Miembro:");
                 string nombre = Console.ReadLine();
+                if (string.IsNullOrEmpty(nombre))
+                {
+                    throw new Exception("El campo esta vacio, ingrese un nombre");
+                }
 
                 Console.WriteLine("Ingrese el Apellido del Miembro:");
                 string apellido = Console.ReadLine();
+                if (string.IsNullOrEmpty(apellido))
+                {
+                    throw new Exception("El campo esta vacio, ingrese un apellido");
+                }
 
                 Console.WriteLine("Por favor, ingresa tu fecha de nacimiento (yyyy-MM-dd):");
                 DateTime.TryParse(Console.ReadLine(), out DateTime fechaNacimiento);
+                if (fechaNacimiento == null && fechaNacimiento == DateTime.MinValue)
+                {
+                    throw new Exception("El campo esta vacio, ingrese una fecha de nacimiento");
+                }
 
                 Console.WriteLine("Ingrese el email del Miembro:");
                 string email = Console.ReadLine();
+                if (string.IsNullOrEmpty(email))
+                {
+                    throw new Exception("El campo esta vacio, ingrese un email");
+                }
 
                 Console.WriteLine("Ingrese la password del Miembro:");
                 string password = Console.ReadLine();
+                if (string.IsNullOrEmpty(password))
+                {
+                    throw new Exception("El campo esta vacio, ingrese una password");
+                }
 
                 Miembro nuevoMiembro = new Miembro(email, password, false, nombre, apellido, fechaNacimiento);
-                string mensaje=unSistema.CrearNuevoMiembro(nuevoMiembro);
+                string mensaje = unSistema.CrearNuevoMiembro(nuevoMiembro);
                 Console.WriteLine(mensaje);
                 Console.ReadKey();
 
@@ -117,27 +137,36 @@ namespace EjecutarObligatorio
                 Console.WriteLine("Ingrese el Mail del Miembro:");
                 string email = Console.ReadLine();
 
-                List<Publicacion> listaPubMiembro = unSistema.ListarPubicaciones(email);
-
-                if (listaPubMiembro.Count == 0)
+                if (!string.IsNullOrEmpty(email))
                 {
-                    Console.WriteLine("No existen Publicaciones");
+                    List<Publicacion> listaPubMiembro = unSistema.ListarPubicaciones(email);
+
+                    if (listaPubMiembro.Count == 0)
+                    {
+                        Console.WriteLine("No existen Publicaciones");
+                    }
+                    else
+                    {
+                        foreach (Publicacion pub in listaPubMiembro)
+                        {
+                            if (pub is Post)
+                            {
+                                Post post = (Post)pub;
+                                Console.WriteLine($"Post de fecha {post.Fecha}; Título {post.Titulo}; texto: {post.Contenido}; Imagen: {post.Img}");
+                            }
+                            if (pub is Comentario)
+                            {
+                                Comentario comentario = (Comentario)pub;
+                                Console.WriteLine($"Comentario de fecha {comentario.Fecha}; Título {comentario.Titulo}; texto: {comentario.Contenido}");
+                            }
+                        }
+                    }
+                    Console.ReadKey();
                 }
                 else
                 {
-                    foreach (Publicacion pub in listaPubMiembro)
-                    {
-                        if (pub is Post)
-                        {
-                            Console.WriteLine($"Post de fecha {pub.Fecha}; Título {pub.Titulo}; texto: {pub.Contenido}");
-                        }
-                        if (pub is Comentario)
-                        {
-                            Console.WriteLine($"Comentario de fecha {pub.Fecha}; Título {pub.Titulo}; texto: {pub.Contenido}");
-                        }
-                    }
+                    throw new Exception("El campo esta vacio, ingrese un mail");
                 }
-                Console.ReadKey();
             }
             catch (Exception e)
             {
@@ -145,6 +174,86 @@ namespace EjecutarObligatorio
                 Console.ReadKey();
             }
         }
+
+        //Opc 3 - Dado un email de mimebro, listar los posts en loq eu haya realizado comentarios.
+        public static void ListarPostsComentados()
+        {
+            try
+            {
+                Console.WriteLine("Ingrese el Mail del Miembro:");
+                string email = Console.ReadLine();
+
+                if (!string.IsNullOrEmpty(email))
+                {
+                    List<Post> listaPostsComentados = unSistema.ListarPost(email);
+
+                    if (listaPostsComentados.Count == 0)
+                    {
+                        throw new Exception("No existen comentarios relacionados a post");
+                    }
+                    else
+                    {
+                        foreach (Post post in listaPostsComentados)
+                        {
+
+                            Console.WriteLine($"Post de fecha {post.Fecha}; Título {post.Titulo}; texto: {post.Contenido}; Imagen: {post.Img}");
+                        }
+                    }
+                    Console.ReadKey();
+                }
+                else
+                {
+                    throw new Exception("El campo esta vacio, ingrese un mail");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
+            }
+        }
+
+        //Opc 4 - Listar entre dos fechas incluidas todos los Posts.
+        public static void ListarPostsEntreFechas()
+        {
+            try
+            {
+                Console.WriteLine("Por favor, ingresa la primer fecha (yyyy-MM-dd):");
+                DateTime.TryParse(Console.ReadLine(), out DateTime primerFecha);
+
+                Console.WriteLine("Por favor, ingresa la segunda fecha (yyyy-MM-dd):");
+                DateTime.TryParse(Console.ReadLine(), out DateTime segundaFecha);
+
+                if (primerFecha != DateTime.MinValue && segundaFecha != DateTime.MinValue)
+                {
+                    List<Post> listaPostsComentados = unSistema.ListarPostFecha(primerFecha, segundaFecha);
+
+                    if (listaPostsComentados.Count == 0)
+                    {
+                        throw new Exception("No existen comentarios relacionados a post");
+                    }
+                    else
+                    {
+                        foreach (Post post in listaPostsComentados)
+                        {
+                            string textoPost = (post.Contenido.Length > 50) ? post.Contenido.Substring(0, 50) : post.Contenido;
+                            Console.WriteLine($"Id: {post.Id}; Fecha: {post.Fecha}; Título: {post.Titulo}; texto: {textoPost};");
+                        }
+                    }
+                    Console.ReadKey();
+                }
+                else
+                {
+                    throw new Exception("Uno de los campos fecha esta vacio");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
+            }
+        }
+
 
     }
 }
