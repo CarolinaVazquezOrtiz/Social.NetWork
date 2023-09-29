@@ -38,7 +38,7 @@ namespace EjecutarObligatorio
                         ListarPubicacionesProgram();
                         break;
                     case 3:
-                        ListarPostProgram();
+                        ListarPostsComentados();
                         break;
                     case 4:
                         break;
@@ -151,6 +151,7 @@ namespace EjecutarObligatorio
 
                 if (!string.IsNullOrEmpty(email))
                 {
+
                     List<Publicacion> listaPubMiembro = unSistema.ListarPubicaciones(email);
 
                     if (listaPubMiembro.Count == 0)
@@ -265,6 +266,8 @@ namespace EjecutarObligatorio
                 Console.ReadKey();
             }
         }
+
+        //Opc 5
 
 
     }

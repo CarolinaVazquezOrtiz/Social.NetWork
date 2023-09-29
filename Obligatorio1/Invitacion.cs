@@ -32,6 +32,7 @@ namespace Obligatorio1
             
         }
 
+        //TERMINAR LOS VALIDAR
         public void ValidarInvitacion()
         {
             ValidarMiembros(MiembroSolicitado, MiembroSolicitante);

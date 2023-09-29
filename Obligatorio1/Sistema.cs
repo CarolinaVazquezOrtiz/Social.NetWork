@@ -1,7 +1,10 @@
+
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Obligatorio1
 {
@@ -185,6 +188,7 @@ namespace Obligatorio1
         }
         //END -------------PRECARGA DE DATOS------------
 
+
         //LOGIN USUARIO
         public string Login(string email, string pass)
         {
@@ -239,6 +243,32 @@ namespace Obligatorio1
         }
         //END LOGIN USUARIO
 
+
+        /// FUNCIONES A FUTURO
+            // FUNCIONALIDAD ADMINSTRADOR
+            public void AdministradorBloquear(Miembro miembro)
+            {
+
+            }
+
+            public void AdministradorDesbloquear(Miembro miembro)
+            {
+
+            }
+
+            public void CensurarComentario(Publicacion publicacion)
+            {
+
+            }
+
+            public void HabilitarComentario(Publicacion publicacion)
+            {
+
+            }
+            // END FUNCIONALIDAD ADMINISTRADOR
+        ///EN FUNCIONES A FUTURO
+
+
         //CREAR NUEVO ADMINISTRADOR
         public string CrearNuevoAdministrador(Administrador administrador)
         {
@@ -255,7 +285,6 @@ namespace Obligatorio1
             return "Se creo el miembro correctamente";
         }
         //END CREAR NUEVO ADMINISTRADOR
-
 
         //CREAR NUEVA INVITACION
         public void CrearNuevaInvitacion(Invitacion invitacion)
@@ -281,6 +310,7 @@ namespace Obligatorio1
         }
         //END CREAR NUEVO POST
 
+
         //CREAR NUEVO COMENTARIO
         public void CrearNuevoComentario(Comentario coment)
         {
@@ -292,6 +322,7 @@ namespace Obligatorio1
             _listaPubicaciones.Add(coment);
         }
         //END CREAR NUEVO COMENTARIO
+
 
         //CREAR NUEVA REACCION
         public void CrearNuevaReaccion(Reaccion react)
@@ -305,36 +336,33 @@ namespace Obligatorio1
         }
         //END CREAR NUEVA REACCION
 
-
-        // FUNCIONALIDAD ADMINSTRADOR
-        public void AdministradorBloquear(Miembro miembro)
+        //OBTENER MIEMBRO
+        public Miembro ObtenerMiembro(string mail)
         {
-
+            Miembro? miembro = null;
+            foreach (Miembro miem in _listaUsuarios)
+            {
+                if (miem.Email == mail)
+                {
+                    miembro = miem;
+                    break;
+                }
+            }
+            return miembro;
         }
-
-        public void AdministradorDesbloquear(Miembro miembro)
-        {
-
-        }
-
-        public void CensurarComentario(Publicacion publicacion)
-        {
-
-        }
-
-        public void HabilitarComentario(Publicacion publicacion)
-        {
-
-        }
-
-        // END FUNCIONALIDAD ADMINISTRADOR
+        //END OBTENER MIEMBRO
 
 
 
 
 
 
-        //P1) CREAR NUEVO MIEMBRO
+
+
+
+
+
+        ///P1) CREAR NUEVO MIEMBRO
         public string CrearNuevoMiembro(Miembro miembro)
         {
             if (miembro == null)
@@ -349,10 +377,10 @@ namespace Obligatorio1
             _listaUsuarios.Add(miembro);
             return "Se creo el miembro correctamente";
         }
-        //END P1) CREAR NUEVO MIEMBRO
+        ///END P1) CREAR NUEVO MIEMBRO
 
-        //P2) listar todas las publicaciones de un MIEMBRO
 
+        ///P2) listar todas las publicaciones de un MIEMBRO
         public List<Publicacion> ListarPubicaciones(string email)
         {
             try
@@ -390,10 +418,10 @@ namespace Obligatorio1
             }
 
         }
-        //END P2) listar todas las publicaciones de un MIEMBRO
+        ///END P2) listar todas las publicaciones de un MIEMBRO
 
 
-        //P3) listar todas los post haya realizado comentarios
+        ///P3) listar todas los post haya realizado comentarios
         public List<Post> ListarPost(string email)
         {
             try
@@ -432,7 +460,7 @@ namespace Obligatorio1
                 throw e;
             }
         }
-        //END P3) listar todas las publicaciones de un MIEMBRO
+        ///END P3) listar todas las publicaciones de un MIEMBRO
 
 
         // P4) Listar entre dos fechas todos los Posts
@@ -467,12 +495,10 @@ namespace Obligatorio1
             }
             
         }
-
- 
-        //END P4) listar todas los post haya realizado comentarios
+        ///END P4) listar todas los post haya realizado comentarios
 
 
-        // P5) Obtener los miembros que haya realizado mas publicaciones de cualquier tipo
+        /// P5) Obtener los miembros que haya realizado mas publicaciones de cualquier tipo
         public int CantidadPublicaciones(string mail)
         {
             int cant = 0;
@@ -500,21 +526,18 @@ namespace Obligatorio1
                 }
             }
 
-        //}
-        //END P5) Obtener los miembros que haya realizado mas publicaciones de cualquier tipo
-
-        public Miembro ObtenerMiembro(string mail)
-        {
-            Miembro? miembro = null;
-            foreach (Miembro miem in _listaUsuarios)
+            foreach (Miembro miem in _listaUsuarios)    //recorro la lista de nuevo para añadir a los miembros con mas pub a la lista
             {
-                if (miem.Email == mail)
+                int cantidadPublicacionesMiembro = CantidadPublicaciones(miem.Email);
+                if (cantidadPublicacionesMiembro == cantidadPublicacionesMax)
                 {
-                    miembro = miem;
-                    break;
+                    listaAux.Add(miem);
                 }
             }
-            return miembro;
+            return listaAux;
         }
+        ///END P5) Obtener los miembros que haya realizado mas publicaciones de cualquier tipo
+
+        
     }
 }

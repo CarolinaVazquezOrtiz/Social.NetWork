@@ -30,6 +30,7 @@ namespace Obligatorio1
             Titulo = titulo;
         }
 
+        //FALTA VALIDAR MIEMBRO
         public void Validar()
         {
             ValidarContenido(Contenido);
@@ -55,19 +56,7 @@ namespace Obligatorio1
             }
         }
 
-        //public static bool ValidarMiembro(Miembro miembro)
-        //{
-        //    bool existe = false;
-        //    foreach (Usuario miem in Sistema.ListaUsuarios)        //esta bien??? Publicacion no conoce a Sistema
-        //    {
-        //        if (!miem.isAdmin)
-        //        {
-        //            existe = true;
-        //            break;
-        //        }
-        //    }
-        //    return existe;
-        //}
+       
 
 
 

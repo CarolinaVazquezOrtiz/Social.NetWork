@@ -22,11 +22,10 @@ namespace Obligatorio1
             PublicacionReaccionada = publicacionReaccionada;
             ValidarReaccion();
         }
-
-        //Un usuario puede poner un solo like/dislike por publicación.--------TERMINAR---------
+        
+        //VALIDAR PUBLICACION Y MIEMBRO
         public void ValidarReaccion()
         {
-            //ValidarMiembro(Miembro);
             ValidarTipoReaccion();
         }
 
@@ -38,9 +37,6 @@ namespace Obligatorio1
             }
         }
 
-        /*public static void ValidarMiembro()
-        {
-
-        }*/
+       
     }
 }
