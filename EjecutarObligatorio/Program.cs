@@ -15,7 +15,8 @@ namespace EjecutarObligatorio
             int opcion;
             do
             {
-                //Console.Clear();
+                /*unSistema.Precargas();       -- REVISAR LO DE LA PRECARGA DEL SISTEMA, PORQUE AGARRA UNA EXCEPCION --
+                Console.Clear();*/      
                 Console.BackgroundColor = ConsoleColor.DarkCyan;
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.WriteLine("Ingrese opcion: \n\n" +
@@ -24,6 +25,7 @@ namespace EjecutarObligatorio
                     "3-Listar posts de un miembro\n" +
                     "4-Listar posts entre 2 fechas\n" +
                     "5-Ver miembros con más publicaciones \n\n" +
+                    "6-Precargar datos \n\n" +
                     "0-salir \n");
                 Console.ResetColor();
                 opcion = PedirNumero();
@@ -34,6 +36,16 @@ namespace EjecutarObligatorio
                         break;
                     case 2:
                         ListarPubicacionesProgram();
+                        break;
+                    case 3:
+                        ListarPostProgram();
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        Precargar();
                         break;
                 }
 
