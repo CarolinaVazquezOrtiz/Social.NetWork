@@ -15,6 +15,7 @@ namespace Obligatorio1
         public List<Publicacion> ListaPublicaciones { get { return _listaPubicaciones; } }
         public List<Reaccion> ListaReacciones { get { return _listaReacciones; } }
 
+
         //-------------PRECARGA DE DATOS------------
         public void Precargas()
         {
@@ -203,7 +204,7 @@ namespace Obligatorio1
             return mensaje;
         }
 
-        private bool ExisteEmail(string email)
+        public bool ExisteEmail(string email)
         {
             bool existe = false;
             foreach (Usuario usu in _listaUsuarios)
@@ -339,7 +340,7 @@ namespace Obligatorio1
             }
             if (_listaUsuarios.Contains(miembro))
             {
-                throw new Exception($"El miembro ya existe.");
+                throw new Exception($"El miembro ya existe."); 
             }
             miembro.ValidarMiembro();
             _listaUsuarios.Add(miembro);
@@ -416,7 +417,6 @@ namespace Obligatorio1
             }
             catch (Exception e)
             {
-
                 throw e;
             }
         }
@@ -445,10 +445,43 @@ namespace Obligatorio1
 
 
         // P5) Obtener los miembros que haya realizado mas publicaciones de cualquier tipo
-        //public List<Post> ListarMiembrosCantidadPublicacion()
-        //{
+        public int CantidadPublicaciones(string mail)
+        {
+            int cant = 0;
+            foreach (Publicacion pub in _listaPubicaciones)
+            {
+                if (pub.Miembro.Email == mail)
+                {
+                    cant++;
+                }
+            }
+            return cant;
+        }
+        
+        public List<Miembro> MiembrosMasPublicaciones()
+        {
+            List<Miembro> listaAux = new List<Miembro>(); 
+            int cantidadPublicacionesMax = 0;
 
-        //}
+            foreach (Miembro miem in _listaUsuarios)
+            {
+                int cantidadPublicacionesMiembro = CantidadPublicaciones(miem.Email);
+                if (cantidadPublicacionesMiembro > cantidadPublicacionesMax)
+                {
+                    cantidadPublicacionesMax = cantidadPublicacionesMiembro;    //guardo la maxima cantidad de Publicaciones
+                }
+            }
+
+            foreach (Miembro miem in _listaUsuarios)    //recorro la lista de nuevo para añadir a los miembros con mas pub a la lista
+            {
+                int cantidadPublicacionesMiembro = CantidadPublicaciones(miem.Email);
+                if (cantidadPublicacionesMiembro == cantidadPublicacionesMax)
+                {
+                    listaAux.Add(miem);
+                }
+            }
+            return listaAux;
+        }
         //END P5) Obtener los miembros que haya realizado mas publicaciones de cualquier tipo
 
         public Miembro ObtenerMiembro(string mail)

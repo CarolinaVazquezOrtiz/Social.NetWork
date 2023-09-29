@@ -15,7 +15,8 @@ namespace EjecutarObligatorio
             int opcion;
             do
             {
-                //Console.Clear();
+                /*unSistema.Precargas();       -- REVISAR LO DE LA PRECARGA DEL SISTEMA, PORQUE AGARRA UNA EXCEPCION --
+                Console.Clear();*/      
                 Console.BackgroundColor = ConsoleColor.DarkCyan;
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.WriteLine("Ingrese opcion: \n\n" +
@@ -35,6 +36,13 @@ namespace EjecutarObligatorio
                         break;
                     case 2:
                         ListarPubicacionesProgram();
+                        break;
+                    case 3:
+                        ListarPostProgram();
+                        break;
+                    case 4:
+                        break;
+                    case 5:
                         break;
                     case 6:
                         Precargar();
@@ -121,26 +129,33 @@ namespace EjecutarObligatorio
                 Console.WriteLine("Ingrese el Mail del Miembro:");
                 string email = Console.ReadLine();
 
-                List<Publicacion> listaPubMiembro = unSistema.ListarPubicaciones(email);
+                if (unSistema.ExisteEmail(email))
+                { 
+                    List<Publicacion> listaPubMiembro = unSistema.ListarPubicaciones(email);
 
-                if (listaPubMiembro.Count == 0)
-                {
-                    Console.WriteLine("No existen Publicaciones");
-                }
-                else
-                {
-                    foreach (Publicacion pub in listaPubMiembro)
+                    if (listaPubMiembro.Count == 0)
                     {
-                        if (pub is Post)
+                        Console.WriteLine("No existen Publicaciones");
+                    }
+                    else
+                    {
+                        foreach (Publicacion pub in listaPubMiembro)
                         {
-                            Console.WriteLine($"Post de fecha {pub.Fecha}; Título {pub.Titulo}; texto: {pub.Contenido}");
-                        }
-                        if (pub is Comentario)
-                        {
-                            Console.WriteLine($"Comentario de fecha {pub.Fecha}; Título {pub.Titulo}; texto: {pub.Contenido}");
+                            if (pub is Post)
+                            {
+                                Console.WriteLine($"Post de fecha {pub.Fecha}; Título {pub.Titulo}; texto: {pub.Contenido}");
+                            }
+                            if (pub is Comentario)
+                            {
+                                Console.WriteLine($"Comentario de fecha {pub.Fecha}; Título {pub.Titulo}; texto: {pub.Contenido}");
+                            }
                         }
                     }
+                }else
+                {
+                    Console.WriteLine("No existe email");
                 }
+
                 Console.ReadKey();
             }
             catch (Exception e)
@@ -149,6 +164,57 @@ namespace EjecutarObligatorio
                 Console.ReadKey();
             }
         }
+
+        /*Opc 3 - Dado un email de miembro, listar los posts en los que haya realizado comentarios. 
+        Se listarán solamente los posts, no los comentarios.  */
+        public static void ListarPostProgram()
+        {
+            try
+            {
+                Console.WriteLine("Ingrese el Mail del Miembro:");
+                string email = Console.ReadLine();
+
+                if (unSistema.ExisteEmail(email))
+                {
+                    List<Post> listaPostMiembro = unSistema.ListarPost(email);
+
+                    if (listaPostMiembro.Count == 0)
+                    {
+                        Console.WriteLine("No existen Post");
+                    }
+                    else
+                    {
+                        foreach (Post post in listaPostMiembro)
+                        {
+                            Console.WriteLine($"Post de fecha {post.Fecha}; Título {post.Titulo}; texto: {post.Contenido}");
+                        }
+                    }
+                }else
+                {
+                    Console.WriteLine("No existe email");
+                }
+
+                Console.ReadKey();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
+            }
+        }
+
+
+        /*Opc 4 - Dadas dos fechas listar los posts realizados entre esas fechas inclusive. Se deberá mostrar id,
+        fecha, título y el texto del post. Si el texto del post supera los 50 caracteres, solo se
+        mostrarán los primeros 50. No se mostrarán los comentarios de dichos posts. El listado
+        estará ordenado por título en forma descendente.  */
+
+
+        /*Opc 5 - Obtener los miembros que hayan realizado más publicaciones de cualquier tipo. Si hay más
+        de un miembro con la misma cantidad de publicaciones mostrarlos todos. Se mostrarán
+        todos los datos de los miembros.  */
+
+
 
     }
 }
