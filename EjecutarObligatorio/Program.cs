@@ -43,6 +43,7 @@ namespace EjecutarObligatorio
                         ListarPostsComentados();
                         break;
                     case 4:
+                        ListarPostsEntreFechas();
                         break;
                     case 5:
                         break;
@@ -110,7 +111,7 @@ namespace EjecutarObligatorio
 
                 Console.WriteLine("Por favor, ingresa tu fecha de nacimiento (yyyy-MM-dd):");
                 DateTime.TryParse(Console.ReadLine(), out DateTime fechaNacimiento);
-                if (fechaNacimiento == null && fechaNacimiento == DateTime.MinValue)
+                if (fechaNacimiento == DateTime.MinValue)
                 {
                     throw new Exception("El campo esta vacio, ingrese una fecha de nacimiento");
                 }
@@ -196,7 +197,7 @@ namespace EjecutarObligatorio
             try
             {
                 Console.WriteLine("Ingrese el Mail del Miembro:");
-                string email = LeerCampoNoVacio();
+                string email = Console.ReadLine();
 
                 if (!string.IsNullOrEmpty(email))
                 {
@@ -238,6 +239,7 @@ namespace EjecutarObligatorio
 
                 Console.WriteLine("Por favor, ingresa la segunda fecha (yyyy-MM-dd):");
                 DateTime.TryParse(Console.ReadLine(), out DateTime segundaFecha);
+                Console.WriteLine();
 
                 if (primerFecha != DateTime.MinValue && segundaFecha != DateTime.MinValue)
                 {

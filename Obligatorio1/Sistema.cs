@@ -115,7 +115,7 @@ namespace Obligatorio1
         }
 
         ///NOTA: Algunos datos de estos post, fueron generados por ChatGPT y modificados 
-        public void PrecargarPosts()    
+        public void PrecargarPosts()
         {
             //Post [0]
             Post post1 = new Post("vacaciones en Miami", new DateTime(2018, 08, 08), _listaUsuarios[0] as Miembro, "primavera en USA", "img.jpg", "privado", false);
@@ -535,6 +535,8 @@ namespace Obligatorio1
                 }
             }
             return listaAux;
+
+
         }
         ///END P5) Obtener los miembros que haya realizado mas publicaciones de cualquier tipo
 

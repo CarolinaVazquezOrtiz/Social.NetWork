@@ -23,7 +23,6 @@ namespace Obligatorio1
             ValidarReaccion();
         }
         
-        //VALIDAR PUBLICACION Y MIEMBRO
         public void ValidarReaccion()
         {
             ValidarTipoReaccion();
