@@ -19,12 +19,9 @@ namespace Obligatorio1
             EsPrivado = esPrivado;
         }
 
-        //Los comentarios a un post privado serán privados, y los correspondientes a un post público serán públicos.
-        //Los posts privados solo podrán ser visualizados y comentados por los amigos de su autor.
         public void ValidarComentario()
         {
             base.Validar();
-            //TERMINAR
         }
 
 

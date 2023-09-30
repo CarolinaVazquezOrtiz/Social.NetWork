@@ -25,17 +25,28 @@ namespace Obligatorio1
         
         public void ValidarReaccion()
         {
-            ValidarTipoReaccion();
+            ValidarTipoReaccion(TipoReaccion);
+            ValidarMiembro(Miembro);
         }
 
-        public void ValidarTipoReaccion()
+        public static void ValidarTipoReaccion(string tipoReaccion)
         {
-            if (TipoReaccion.ToLower() != "like" && TipoReaccion.ToLower() != "dislike")
+            if (tipoReaccion.ToLower() != "like" && tipoReaccion.ToLower() != "dislike")
             {
-                throw new Exception($"Tipo de reaccion: {TipoReaccion} no es valido");
+                throw new Exception($"Tipo de reaccion: {tipoReaccion} no es valido");
             }
         }
 
-       
+        public static void ValidarMiembro(Miembro miembro)
+        {
+            if (miembro == null)
+            {
+                throw new Exception("El miembro es vacio en reaccion");
+            }
+
+            
+        }
+
+
     }
 }

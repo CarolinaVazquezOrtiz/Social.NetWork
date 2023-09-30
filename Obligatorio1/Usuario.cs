@@ -62,13 +62,6 @@ namespace Obligatorio1
             return Regex.IsMatch(pass, patron);
         }
 
-
-
-        public override bool Equals(object? obj)
-        {
-            Usuario? unUsuario = obj as Usuario;
-            return unUsuario != null && Email.ToLower() == unUsuario.Email.ToLower();
-        }
-
+        
     }
 }

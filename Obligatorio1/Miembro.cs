@@ -27,13 +27,13 @@ namespace Obligatorio1
             Apellido = apellido;
             FechaNac = fechaNac;
             Bloqueado = false;
+            base.Validar();
             ValidarMiembro();
         }
 
 
         public void ValidarMiembro()
         {
-            base.Validar();
             if (string.IsNullOrWhiteSpace(Nombre))
             {
                 throw new Exception("El nombre está vacío");

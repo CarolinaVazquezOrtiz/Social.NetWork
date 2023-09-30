@@ -46,6 +46,7 @@ namespace EjecutarObligatorio
                         ListarPostsEntreFechas();
                         break;
                     case 5:
+                        MiembrosConMasPublicaciones();
                         break;
                     default:
                         Console.WriteLine("Opción no válida. Ingrese un número del 1 al 5, o pulse 0 para salir");
@@ -271,8 +272,32 @@ namespace EjecutarObligatorio
             }
         }
 
-        //Opc 5
+        //Opc 5 - Desplegar los mimebros con mas publicaciones
+        public static void MiembrosConMasPublicaciones()
+        {
+            try
+            {
+                List<Miembro> listaMimebroFiltrada = unSistema.MiembrosMasPublicaciones();
 
+                if (listaMimebroFiltrada.Count == 0)
+                {
+                    throw new Exception("No existen mimebros con publicaciones");
+                }
+                else
+                {
+                    foreach (Miembro miem in listaMimebroFiltrada)
+                    {
+                        Console.WriteLine($"Nombre: {miem.Nombre}; Apellido: {miem.Apellido}; Fecha de Nacimiento: {miem.FechaNac}; Email: {miem.Email}; Password: {miem.Password};");
+                    }
+                }
+                Console.ReadKey();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
+            }
+        }
 
 
 

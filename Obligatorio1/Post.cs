@@ -30,7 +30,6 @@ namespace Obligatorio1
             ValidarImagen(Img);
         }
 
-        //no vacío y debe terminar en “.jpg” o “.png”
         public static void ValidarImagen(string img)
         {
             if (string.IsNullOrEmpty(img))

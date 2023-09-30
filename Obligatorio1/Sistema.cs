@@ -173,6 +173,7 @@ namespace Obligatorio1
             Comentario comentario15 = new Comentario(_listaPubicaciones[4] as Post, "No puedo evitar envidiar tu talento para la fotografía. 📷💫", new DateTime(2023, 04, 08), _listaUsuarios[3] as Miembro, "talentoso", false);
             CrearNuevoComentario(comentario15);
         }
+
         public void PrecargarReacciones() //like o dislike
         {
             //reacciones a Post
@@ -365,6 +366,7 @@ namespace Obligatorio1
         ///P1) CREAR NUEVO MIEMBRO
         public string CrearNuevoMiembro(Miembro miembro)
         {
+            
             if (miembro == null)
             {
                 throw new Exception("El miembro recibido esta vacio.");
@@ -517,25 +519,33 @@ namespace Obligatorio1
             List<Miembro> listaAux = new List<Miembro>(); 
             int cantidadPublicacionesMax = 0;
 
-            foreach (Miembro miem in _listaUsuarios)
+            foreach (Usuario usu in _listaUsuarios)
             {
-                int cantidadPublicacionesMiembro = CantidadPublicaciones(miem.Email);
-                if (cantidadPublicacionesMiembro > cantidadPublicacionesMax)
-                {
-                    cantidadPublicacionesMax = cantidadPublicacionesMiembro;    //guardo la maxima cantidad de Publicaciones
+                if (usu is Miembro) {
+                    Miembro miem = (Miembro)usu;
+                    int cantidadPublicacionesMiembro = CantidadPublicaciones(miem.Email);
+                    if (cantidadPublicacionesMiembro > cantidadPublicacionesMax)
+                    {
+                        cantidadPublicacionesMax = cantidadPublicacionesMiembro;    //guardo la maxima cantidad de Publicaciones
+                    }
+
+                }
+
+            }
+
+            foreach (Usuario usu in _listaUsuarios){ //recorro la lista de nuevo para añadir a los miembros con mas pub a la lista
+
+                if (usu is Miembro){
+                    Miembro miem = (Miembro)usu;
+                    int cantidadPublicacionesMiembro = CantidadPublicaciones(miem.Email);
+                    if (cantidadPublicacionesMiembro == cantidadPublicacionesMax)
+                    {
+                        listaAux.Add(miem);
+                    }
                 }
             }
 
-            foreach (Miembro miem in _listaUsuarios)    //recorro la lista de nuevo para añadir a los miembros con mas pub a la lista
-            {
-                int cantidadPublicacionesMiembro = CantidadPublicaciones(miem.Email);
-                if (cantidadPublicacionesMiembro == cantidadPublicacionesMax)
-                {
-                    listaAux.Add(miem);
-                }
-            }
             return listaAux;
-
 
         }
         ///END P5) Obtener los miembros que haya realizado mas publicaciones de cualquier tipo

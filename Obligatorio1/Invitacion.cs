@@ -32,22 +32,17 @@ namespace Obligatorio1
             
         }
 
-        //TERMINAR LOS VALIDAR
         public void ValidarInvitacion()
         {
-            ValidarMiembros(MiembroSolicitado, MiembroSolicitante);
             ValidarEstado(Estado);
-
-        }
-
-        public static void ValidarMiembros(Miembro miembroSolicitado, Miembro miembroSolicitante)
-        {
-
         }
 
         public static void ValidarEstado(string estado)
         {
-
+            if (estado!= "aprobada" || estado != "proceso" || estado != "rechazada")
+            {
+                throw new Exception("El estado en Invitacion no es valido.");
+            }
         }
 
     }

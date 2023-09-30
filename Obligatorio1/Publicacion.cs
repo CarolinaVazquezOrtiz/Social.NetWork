@@ -35,10 +35,8 @@ namespace Obligatorio1
         {
             ValidarContenido(Contenido);
             ValidarTitulo(Titulo);
-            //ValidarMiembro(Miembro);
         }
 
-        //no vacío
         public static void ValidarContenido(string cont)
         {
             if (string.IsNullOrEmpty(cont))
@@ -47,7 +45,6 @@ namespace Obligatorio1
             }
         }
 
-        //titulo no vacío, al menos de 3 caracteres
         public static void ValidarTitulo(string tit)
         {
             if (string.IsNullOrEmpty(tit) || tit.Length < 3)
@@ -55,8 +52,6 @@ namespace Obligatorio1
                 throw new Exception("El título debe contener al menos 3 caracteres");
             }
         }
-
-       
 
 
 
