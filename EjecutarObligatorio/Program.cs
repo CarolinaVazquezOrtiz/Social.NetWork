@@ -13,24 +13,26 @@ namespace EjecutarObligatorio
         {
             //---menú en consola---
             int opcion;
+            Precargar();
             do
             {
-                /*unSistema.Precargas();       -- REVISAR LO DE LA PRECARGA DEL SISTEMA, PORQUE AGARRA UNA EXCEPCION --
-                Console.Clear();*/      
+                Console.Clear();      
                 Console.BackgroundColor = ConsoleColor.DarkCyan;
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.WriteLine("Ingrese opcion: \n\n" +
                     "1-Registrar miembro\n" +
                     "2-Listar publicaciones de un miembro\n" +
-                    "3-Listar posts de un miembro\n" +
+                    "3-Listar posts de un miembro en los que haya realizado comentarios\n" +
                     "4-Listar posts entre 2 fechas\n" +
                     "5-Ver miembros con más publicaciones \n\n" +
-                    "6-Precargar datos \n\n" +
                     "0-salir \n");
                 Console.ResetColor();
                 opcion = PedirNumero();
-                switch (opcion)
+
+                if (opcion != 0)        //evita mostrar el mensaje por defecto si se ingresa 0 al iniciar
                 {
+                    switch (opcion)
+                    {
                     case 1:
                         RegistrarMiembro();
                         break;
@@ -44,9 +46,11 @@ namespace EjecutarObligatorio
                         break;
                     case 5:
                         break;
-                    case 6:
-                        Precargar();
+                    default:
+                        Console.WriteLine("Opción no válida. Ingrese un número del 1 al 5, o pulse 0 para salir");
+                        Console.ReadLine(); // Pausa para que el usuario pueda ver el mensaje de error
                         break;
+                    }
                 }
 
             } while (opcion != 0);
@@ -57,13 +61,11 @@ namespace EjecutarObligatorio
             try
             {
                 unSistema.Precargas();
-                Console.WriteLine("Precarga de datos correcta");
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
-            Console.ReadKey();
         }
 
         private static int PedirNumero()
@@ -194,7 +196,7 @@ namespace EjecutarObligatorio
             try
             {
                 Console.WriteLine("Ingrese el Mail del Miembro:");
-                string email = Console.ReadLine();
+                string email = LeerCampoNoVacio();
 
                 if (!string.IsNullOrEmpty(email))
                 {
@@ -268,6 +270,8 @@ namespace EjecutarObligatorio
         }
 
         //Opc 5
+
+
 
 
     }
