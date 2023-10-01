@@ -26,7 +26,6 @@ namespace Obligatorio1
         public void ValidarReaccion()
         {
             ValidarTipoReaccion(TipoReaccion);
-            ValidarMiembro(Miembro);
         }
 
         public static void ValidarTipoReaccion(string tipoReaccion)
@@ -35,16 +34,6 @@ namespace Obligatorio1
             {
                 throw new Exception($"Tipo de reaccion: {tipoReaccion} no es valido");
             }
-        }
-
-        public static void ValidarMiembro(Miembro miembro)
-        {
-            if (miembro == null)
-            {
-                throw new Exception("El miembro es vacio en reaccion");
-            }
-
-            
         }
 
 

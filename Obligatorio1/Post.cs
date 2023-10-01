@@ -22,6 +22,7 @@ namespace Obligatorio1
             Img = img;
             Estado = estado;
             Censurado = censurado;
+            ValidarPost();
         }
 
         public void ValidarPost()

@@ -38,7 +38,7 @@ namespace Obligatorio1
             }
         }
 
-        private static bool FormatoEmail(String email)
+        private static bool FormatoEmail(string email)
         {
             // Define una expresión regular para validar direcciones de correo electrónico.
             string patron = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";

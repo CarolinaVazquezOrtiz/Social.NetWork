@@ -16,7 +16,7 @@ namespace Obligatorio1
         
         public DateTime FechaNac { get; set; }
 
-        public bool Bloqueado { get; set; }
+        private bool Bloqueado { get; set; }
         
         private List<Miembro> _listaAmigos = new List<Miembro>();
 
@@ -27,13 +27,16 @@ namespace Obligatorio1
             Apellido = apellido;
             FechaNac = fechaNac;
             Bloqueado = false;
-            base.Validar();
             ValidarMiembro();
         }
 
-
+        /// <summary>
+/// 
+/// </summary>
+/// <exception cref="Exception"></exception>
         public void ValidarMiembro()
         {
+            base.Validar();
             if (string.IsNullOrWhiteSpace(Nombre))
             {
                 throw new Exception("El nombre está vacío");

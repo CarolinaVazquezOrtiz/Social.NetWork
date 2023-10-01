@@ -17,6 +17,7 @@ namespace Obligatorio1
         {
             Post = post;
             EsPrivado = esPrivado;
+            ValidarComentario();
         }
 
         public void ValidarComentario()

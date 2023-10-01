@@ -28,6 +28,7 @@ namespace Obligatorio1
             Fecha = fecha;
             Miembro = miembro;
             Titulo = titulo;
+            Validar();
         }
 
         //FALTA VALIDAR MIEMBRO

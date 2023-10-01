@@ -156,7 +156,7 @@ namespace EjecutarObligatorio
                 if (!string.IsNullOrEmpty(email))
                 {
 
-                    List<Publicacion> listaPubMiembro = unSistema.ListarPubicaciones(email);
+                    List<Publicacion> listaPubMiembro = unSistema.ListarPublicaciones(email);
 
                     if (listaPubMiembro.Count == 0)
                     {

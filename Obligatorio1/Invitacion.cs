@@ -28,8 +28,7 @@ namespace Obligatorio1
             MiembroSolicitante = miembroSolicitante;
             Estado = estado;
             FechaSolicitud = fechaSolicitud;
-
-            
+            ValidarInvitacion();
         }
 
         public void ValidarInvitacion()

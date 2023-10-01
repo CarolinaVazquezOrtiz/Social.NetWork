@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Obligatorio1
 {
@@ -23,6 +24,9 @@ namespace Obligatorio1
 
 
         //-------------PRECARGA DE DATOS------------
+
+        
+        
         public void Precargas()
         {
             PrecargarMiembros();
@@ -33,7 +37,7 @@ namespace Obligatorio1
             PrecargarReacciones();
         }
 
-        public void PrecargarMiembros()
+        private void PrecargarMiembros()
         {
             Miembro miembro1 = new Miembro("caro19@gmail.com", "Estrella-1", false, "Carolina", "Vazquez", new DateTime(1991, 10, 10));
             CrearNuevoMiembro(miembro1);
@@ -55,13 +59,17 @@ namespace Obligatorio1
             CrearNuevoMiembro(miembro9);
             Miembro miembro10 = new Miembro("second2@gmail.com", "Marte$19", false, "Segundo", "Machado", new DateTime(1988, 08, 08));
             CrearNuevoMiembro(miembro10);
+            Miembro miembro11 = new Miembro("zara@gmail.com", "Nept-1771", false, "Zara", "Machado", new DateTime(1990, 08, 08));
+            CrearNuevoMiembro(miembro11);       //posicion 10 de la lista
         }
-        public void PrecargarAdministradores()
+
+        private void PrecargarAdministradores()
         {
             Administrador admin1 = new Administrador("guille77@gmail.com", "Pluton-77", true);
             CrearNuevoAdministrador(admin1);
         }
-        public void PrecargarInvitaciones()
+
+        private void PrecargarInvitaciones()
         {
             //Invitaciones del miembro en posicion 0 en estado APROBADO
             Invitacion invita1 = new Invitacion(_listaUsuarios[0] as Miembro, _listaUsuarios[1] as Miembro, "aprobada", new DateTime(1988, 08, 08));
@@ -115,7 +123,7 @@ namespace Obligatorio1
         }
 
         ///NOTA: Algunos datos de estos post, fueron generados por ChatGPT y modificados 
-        public void PrecargarPosts()
+        private void PrecargarPosts()
         {
             //Post [0]
             Post post1 = new Post("vacaciones en Miami", new DateTime(2018, 08, 08), _listaUsuarios[0] as Miembro, "primavera en USA", "img.jpg", "privado", false);
@@ -135,7 +143,7 @@ namespace Obligatorio1
         }
 
         ///NOTA: Generados por ChatGPT 
-        public void PrecargarComentarios()
+        private void PrecargarComentarios()
         {
             //Post [0]
             Comentario comentario1 = new Comentario(_listaPubicaciones[0] as Post, "¡Wow, esta foto es simplemente impresionante! 😍", new DateTime(2023, 01, 08), _listaUsuarios[1] as Miembro, "foto divi", false);
@@ -174,7 +182,7 @@ namespace Obligatorio1
             CrearNuevoComentario(comentario15);
         }
 
-        public void PrecargarReacciones() //like o dislike
+        private void PrecargarReacciones() //like o dislike
         {
             //reacciones a Post
             Reaccion reaccion1 = new Reaccion("like", _listaUsuarios[1] as Miembro, _listaPubicaciones[0] as Post);
@@ -187,6 +195,7 @@ namespace Obligatorio1
             Reaccion reaccion4 = new Reaccion("dislike", _listaUsuarios[3] as Miembro, _listaPubicaciones[4] as Post);
             CrearNuevaReaccion(reaccion4);
         }
+        
         //END -------------PRECARGA DE DATOS------------
 
 
@@ -212,7 +221,7 @@ namespace Obligatorio1
             return mensaje;
         }
 
-        public bool ExisteEmail(string email)
+        private bool ExisteEmail(string email)
         {
             bool existe = false;
             foreach (Usuario usu in _listaUsuarios)
@@ -245,37 +254,16 @@ namespace Obligatorio1
         //END LOGIN USUARIO
 
 
-        /// FUNCIONES A FUTURO
-            // FUNCIONALIDAD ADMINSTRADOR
-            public void AdministradorBloquear(Miembro miembro)
-            {
-
-            }
-
-            public void AdministradorDesbloquear(Miembro miembro)
-            {
-
-            }
-
-            public void CensurarComentario(Publicacion publicacion)
-            {
-
-            }
-
-            public void HabilitarComentario(Publicacion publicacion)
-            {
-
-            }
-            // END FUNCIONALIDAD ADMINISTRADOR
-        ///EN FUNCIONES A FUTURO
-
-
         //CREAR NUEVO ADMINISTRADOR
         public string CrearNuevoAdministrador(Administrador administrador)
         {
             if (administrador == null)
             {
                 throw new Exception("El admin recibido esta vacio.");
+            }
+            if (administrador is Administrador)
+            {
+                throw new Exception($"El usuario tiene que ser de tipo Administrador");
             }
             if (_listaUsuarios.Contains(administrador))
             {
@@ -290,6 +278,10 @@ namespace Obligatorio1
         //CREAR NUEVA INVITACION
         public void CrearNuevaInvitacion(Invitacion invitacion)
         {
+            if (invitacion.MiembroSolicitado is Miembro && invitacion.MiembroSolicitante is Miembro)
+            {
+                throw new Exception($"Los usuarios tienen que ser de tipo Miembro para crear una invitacion");
+            }
             if (_listaInvitaciones.Contains(invitacion))
             {
                 throw new Exception($"La invitacion ya existe");
@@ -302,6 +294,10 @@ namespace Obligatorio1
         //CREAR NUEVO POST
         public void CrearNuevoPost(Post post)
         {
+            if (post.Miembro is Miembro)
+            {
+                throw new Exception($"El usuario tiene que ser de tipo Miembro para crear un Post");
+            }
             if (_listaPubicaciones.Contains(post))
             {
                 throw new Exception($"El Post ya fue publicado");
@@ -315,6 +311,10 @@ namespace Obligatorio1
         //CREAR NUEVO COMENTARIO
         public void CrearNuevoComentario(Comentario coment)
         {
+            if (coment.Miembro is Miembro)
+            {
+                throw new Exception($"El usuario tiene que ser de tipo Miembro para crear un Comentario");
+            }
             if (_listaPubicaciones.Contains(coment))
             {
                 throw new Exception($"El Comentario ya fue publicado");
@@ -328,6 +328,10 @@ namespace Obligatorio1
         //CREAR NUEVA REACCION
         public void CrearNuevaReaccion(Reaccion react)
         {
+            if (react.Miembro is Miembro)
+            {
+                throw new Exception($"El usuario tiene que ser de tipo Miembro para reaccionar");
+            }
             if (_listaReacciones.Contains(react))
             {
                 throw new Exception($"Ya existe reaccion");
@@ -338,12 +342,12 @@ namespace Obligatorio1
         //END CREAR NUEVA REACCION
 
         //OBTENER MIEMBRO
-        public Miembro ObtenerMiembro(string mail)
+        public Miembro ObtenerMiembro(string email)
         {
             Miembro? miembro = null;
             foreach (Miembro miem in _listaUsuarios)
             {
-                if (miem.Email == mail)
+                if (miem.Email == email)
                 {
                     miembro = miem;
                     break;
@@ -363,7 +367,7 @@ namespace Obligatorio1
 
 
 
-        ///P1) CREAR NUEVO MIEMBRO
+        //P1) CREAR NUEVO MIEMBRO
         public string CrearNuevoMiembro(Miembro miembro)
         {
             
@@ -379,11 +383,17 @@ namespace Obligatorio1
             _listaUsuarios.Add(miembro);
             return "Se creo el miembro correctamente";
         }
-        ///END P1) CREAR NUEVO MIEMBRO
+        //END P1) CREAR NUEVO MIEMBRO
 
 
-        ///P2) listar todas las publicaciones de un MIEMBRO
-        public List<Publicacion> ListarPubicaciones(string email)
+        //P2) listar todas las publicaciones de un MIEMBRO
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<Publicacion> ListarPublicaciones(string email)
         {
             try
             {
@@ -420,10 +430,12 @@ namespace Obligatorio1
             }
 
         }
-        ///END P2) listar todas las publicaciones de un MIEMBRO
+        
+        //END P2) listar todas las publicaciones de un MIEMBRO
 
 
-        ///P3) listar todas los post haya realizado comentarios
+        //P3) listar todas los post haya realizado comentarios
+        
         public List<Post> ListarPost(string email)
         {
             try
@@ -462,10 +474,14 @@ namespace Obligatorio1
                 throw e;
             }
         }
-        ///END P3) listar todas las publicaciones de un MIEMBRO
+        //END P3) listar todas las publicaciones de un MIEMBRO
 
 
         // P4) Listar entre dos fechas todos los Posts
+        /// <summary>
+        ///     
+        /// </summary>
+        /// <returns></returns>
         public List<Post> ListarPostFecha(DateTime fechaInicio, DateTime fechaFin)
         {
             try
@@ -497,10 +513,14 @@ namespace Obligatorio1
             }
             
         }
-        ///END P4) listar todas los post haya realizado comentarios
+        //END P4) listar todas los post haya realizado comentarios
 
 
-        /// P5) Obtener los miembros que haya realizado mas publicaciones de cualquier tipo
+        // P5) Obtener los miembros que haya realizado mas publicaciones de cualquier tipo
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public int CantidadPublicaciones(string mail)
         {
             int cant = 0;
@@ -514,6 +534,10 @@ namespace Obligatorio1
             return cant;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<Miembro> MiembrosMasPublicaciones()
         {
             List<Miembro> listaAux = new List<Miembro>(); 
@@ -548,7 +572,7 @@ namespace Obligatorio1
             return listaAux;
 
         }
-        ///END P5) Obtener los miembros que haya realizado mas publicaciones de cualquier tipo
+        //END P5) Obtener los miembros que haya realizado mas publicaciones de cualquier tipo
 
         
     }
