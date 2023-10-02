@@ -122,11 +122,20 @@ namespace EjecutarObligatorio
                     throw new Exception("El campo esta vacio, ingrese un apellido");
                 }
 
-                Console.WriteLine("Por favor, ingresa tu fecha de nacimiento (yyyy-MM-dd):");
-                DateTime.TryParse(Console.ReadLine(), out DateTime fechaNacimiento);
-                if (fechaNacimiento == DateTime.MinValue)
+                Console.Write("Ingrese su fecha de nacimiento (yyyy-MM-dd): ");
+                string input = Console.ReadLine();
+                DateTime fechaNacimiento;
+                if (DateTime.TryParseExact(input, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.None, out fechaNacimiento))
                 {
-                    throw new Exception("El campo esta vacio, ingrese una fecha de nacimiento");
+                    // Verificar que la fecha de nacimiento no sea mayor que la fecha actual
+                    if (fechaNacimiento >= DateTime.Now)
+                    {
+                        throw new Exception("La fecha de nacimiento no puede ser mayor que la fecha actual.");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Formato de fecha no válido. Debe ser yyyy-MM-dd.");
                 }
 
                 Console.WriteLine("Ingrese la password del Miembro:");

@@ -48,7 +48,7 @@ namespace Obligatorio1
 
         public static void ValidarTitulo(string tit)
         {
-            if (string.IsNullOrEmpty(tit) || tit.Length < 3)
+            if (string.IsNullOrEmpty(tit) && tit.Length < 3)
             {
                 throw new Exception("El título debe contener al menos 3 caracteres");
             }

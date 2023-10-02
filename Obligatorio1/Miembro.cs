@@ -16,7 +16,7 @@ namespace Obligatorio1
         
         public DateTime FechaNac { get; set; }
 
-        private bool Bloqueado { get; set; }
+        public bool Bloqueado { get;  set; }
         
         private List<Miembro> _listaAmigos = new List<Miembro>();
 
@@ -31,9 +31,8 @@ namespace Obligatorio1
         }
 
         /// <summary>
-/// 
-/// </summary>
-/// <exception cref="Exception"></exception>
+        /// 
+        /// </summary>
         public void ValidarMiembro()
         {
             base.Validar();

@@ -226,10 +226,6 @@ namespace Obligatorio1
             {
                 throw new Exception("El admin recibido esta vacio.");
             }
-            if (administrador is Administrador)
-            {
-                throw new Exception($"El usuario tiene que ser de tipo Administrador");
-            }
             if (_listaUsuarios.Contains(administrador))
             {
                 throw new Exception($"El admin ya existe.");
@@ -245,10 +241,6 @@ namespace Obligatorio1
         /// </summary>
         public void CrearNuevaInvitacion(Invitacion invitacion)
         {
-            if (invitacion.MiembroSolicitado is Miembro && invitacion.MiembroSolicitante is Miembro)
-            {
-                throw new Exception($"Los usuarios tienen que ser de tipo Miembro para crear una invitacion");
-            }
             if (_listaInvitaciones.Contains(invitacion))
             {
                 throw new Exception($"La invitacion ya existe");
@@ -263,10 +255,6 @@ namespace Obligatorio1
         /// </summary>
         public void CrearNuevoPost(Post post)
         {
-            if (post.Miembro is Miembro)
-            {
-                throw new Exception($"El usuario tiene que ser de tipo Miembro para crear un Post");
-            }
             if (_listaPubicaciones.Contains(post))
             {
                 throw new Exception($"El Post ya fue publicado");
@@ -281,10 +269,6 @@ namespace Obligatorio1
         /// </summary>
         public void CrearNuevoComentario(Comentario coment)
         {
-            if (coment.Miembro is Miembro)
-            {
-                throw new Exception($"El usuario tiene que ser de tipo Miembro para crear un Comentario");
-            }
             if (_listaPubicaciones.Contains(coment))
             {
                 throw new Exception($"El Comentario ya fue publicado");
@@ -299,10 +283,6 @@ namespace Obligatorio1
         /// </summary>
         public void CrearNuevaReaccion(Reaccion react)
         {
-            if (react.Miembro is Miembro)
-            {
-                throw new Exception($"El usuario tiene que ser de tipo Miembro para reaccionar");
-            }
             if (_listaReacciones.Contains(react))
             {
                 throw new Exception($"Ya existe reaccion");
@@ -376,12 +356,11 @@ namespace Obligatorio1
         //END P1) CREAR NUEVO MIEMBRO
 
 
-        //P2) listar todas las publicaciones de un MIEMBRO
 
         /// <summary>
-        /// 
+        ///     En esta funcion se retorna en una lista todas las publicaciones realizadas por el mimebro que coincida con el email de referencia.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>retorna una lista filtrada de publicacion</returns>
         public List<Publicacion> ListarPublicaciones(string email)
         {
             try
@@ -419,8 +398,6 @@ namespace Obligatorio1
             }
 
         }
-
-        //END P2) listar todas las publicaciones de un MIEMBRO
 
 
 
@@ -513,12 +490,12 @@ namespace Obligatorio1
         ///     Esta funcion toma el email del miembro y lo compara con todas las publicaciones que contengan un Mimebro con el mismo email
         /// </summary>
         /// <returns>retorna la cantidad de coincidencias</returns>
-        public int CantidadPublicaciones(string email)
+        public int CantidadPublicaciones(string mail)
         {
             int cant = 0;
             foreach (Publicacion pub in _listaPubicaciones)
             {
-                if (pub.Miembro.Email == email)
+                if (pub.Miembro.Email == mail)
                 {
                     cant++;
                 }
@@ -535,12 +512,13 @@ namespace Obligatorio1
         /// <returns>retorna una lista de mimebros filtrada</returns>
         public List<Miembro> MiembrosMasPublicaciones()
         {
-            List<Miembro> listaAux = new List<Miembro>(); 
+            List<Miembro> listaAux = new List<Miembro>();
             int cantidadPublicacionesMax = 0;
 
             foreach (Usuario usu in _listaUsuarios)
             {
-                if (usu is Miembro) {
+                if (usu is Miembro)
+                {
                     Miembro miem = (Miembro)usu;
                     int cantidadPublicacionesMiembro = CantidadPublicaciones(miem.Email);
                     if (cantidadPublicacionesMiembro > cantidadPublicacionesMax)
@@ -552,9 +530,11 @@ namespace Obligatorio1
 
             }
 
-            foreach (Usuario usu in _listaUsuarios){ //recorro la lista de nuevo para añadir a los miembros con mas pub a la lista
+            foreach (Usuario usu in _listaUsuarios)
+            { //recorro la lista de nuevo para añadir a los miembros con mas pub a la lista
 
-                if (usu is Miembro){
+                if (usu is Miembro)
+                {
                     Miembro miem = (Miembro)usu;
                     int cantidadPublicacionesMiembro = CantidadPublicaciones(miem.Email);
                     if (cantidadPublicacionesMiembro == cantidadPublicacionesMax)
@@ -569,6 +549,6 @@ namespace Obligatorio1
         }
 
 
-        
+
     }
 }

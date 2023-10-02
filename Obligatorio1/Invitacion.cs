@@ -38,7 +38,7 @@ namespace Obligatorio1
 
         public static void ValidarEstado(string estado)
         {
-            if (estado!= "aprobada" && estado != "proceso" && estado != "rechazada")
+            if (estado != "aprobada" && estado != "proceso" && estado != "rechazada")
             {
                 throw new Exception("El estado en Invitacion no es valido.");
             }
