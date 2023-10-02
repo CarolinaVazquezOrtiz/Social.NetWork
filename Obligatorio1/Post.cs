@@ -25,12 +25,19 @@ namespace Obligatorio1
             ValidarPost();
         }
 
+        /// <summary>
+        ///     Esta funcion llama al validar de la clase padre, ademas valida que el campo imagen sea valido
+        /// </summary>
         public void ValidarPost()
         {
             base.Validar();
             ValidarImagen(Img);
         }
 
+        /// <summary>
+        ///     Esta funcion realizar una validacion de la imagen la cual no puede ser vacia y ademas que tiene que terminar
+        ///     con .png o .jpg
+        /// </summary>
         public static void ValidarImagen(string img)
         {
             if (string.IsNullOrEmpty(img))

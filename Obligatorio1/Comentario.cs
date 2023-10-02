@@ -20,6 +20,9 @@ namespace Obligatorio1
             ValidarComentario();
         }
 
+        /// <summary>
+        ///     Llama validar del padre
+        /// </summary>
         public void ValidarComentario()
         {
             base.Validar();

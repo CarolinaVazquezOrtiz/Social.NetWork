@@ -31,11 +31,18 @@ namespace Obligatorio1
             ValidarInvitacion();
         }
 
+        /// <summary>
+        ///     Esta funcion llama a una funcion secundaria statica
+        /// </summary>
         public void ValidarInvitacion()
         {
             ValidarEstado(Estado);
         }
 
+        /// <summary>
+        ///     Esta funcion se le pasa un estado el cual es string y se verifica que no sea disitino a ninguno de los estados
+        ///     que se piden en la letra del Obligatorio , en el caso contrario se larga una excepcion
+        /// </summary>
         public static void ValidarEstado(string estado)
         {
             if (estado != "aprobada" && estado != "proceso" && estado != "rechazada")

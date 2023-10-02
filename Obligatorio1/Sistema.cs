@@ -23,8 +23,6 @@ namespace Obligatorio1
         public List<Reaccion> ListaReacciones { get { return _listaReacciones; } }
 
 
-        //-------------PRECARGA DE DATOS------------
-        
         /// <summary>
         ///     En esta funcion se llaman a las precargas para ejecutarlas dentro de la clase sistema ya que son funciones privadas.
         /// </summary>
@@ -37,6 +35,7 @@ namespace Obligatorio1
             PrecargarComentarios();
             PrecargarReacciones();
         }
+
 
         /// <summary>
         ///     En esta funcion se precargan todos los mimebros pedidos por las letra del Obligatorio usando una funcion CrearNuevoMiembro que se vera mas adelante
@@ -67,6 +66,7 @@ namespace Obligatorio1
             CrearNuevoMiembro(miembro11);       //posicion 10 de la lista
         }
 
+
         /// <summary>
         ///     En esta funcion se precarga el administrador que se pide en la letra del Obligatorio usando una funcion CrearNuevoAdministrador que se vera mas adelante
         /// </summary>
@@ -75,6 +75,7 @@ namespace Obligatorio1
             Administrador admin1 = new Administrador("guille77@gmail.com", "Pluton-77", true);
             CrearNuevoAdministrador(admin1);
         }
+
 
         /// <summary>
         ///     En esta funcion se precarga las invitaciones que se pide en la letra del Obligatorio usando una funcion CrearNuevaInvitacion que se vera mas adelante
@@ -132,6 +133,7 @@ namespace Obligatorio1
             CrearNuevaInvitacion(invita21);
         }
 
+
         /// <summary>
         ///     En esta funcion se precargan los Posts que se pide en la letra del Obligatorio usando una funcion CrearNuevoPost que se vera mas adelante
         /// </summary>
@@ -153,6 +155,7 @@ namespace Obligatorio1
             Post post5 = new Post("Noche de concierto en Nueva York", new DateTime(2022, 07, 03), _listaUsuarios[4] as Miembro, "Vibrando al ritmo de la Gran Manzana. 🎶🗽", "nyconcert.jpg", "publico", false);
             CrearNuevoPost(post5);
         }
+
 
         /// <summary>
         ///     En esta funcion se precargan los Comentarios que se pide en la letra del Obligatorio usando una funcion CrearNuevoComentario que se vera mas adelante
@@ -196,6 +199,7 @@ namespace Obligatorio1
             CrearNuevoComentario(comentario15);
         }
 
+
         /// <summary>
         ///     En esta funcion se precargan las Reacciones que se pide en la letra del Obligatorio usando una funcion CrearNuevaReaccion que se vera mas adelante
         /// </summary>
@@ -212,14 +216,13 @@ namespace Obligatorio1
             Reaccion reaccion4 = new Reaccion("dislike", _listaUsuarios[3] as Miembro, _listaPubicaciones[4] as Post);
             CrearNuevaReaccion(reaccion4);
         }  
-        
-        //END -------------PRECARGA DE DATOS------------
 
 
         /// <summary>
-        ///     Se recibe un tipo administrador
+        ///     Esta funcion recibe un tipo Adeministrador y se valua que este no sea vacio y que no este ya en la lista de usuarios
+        ///     una vez validado esto se agrega a la lista
         /// </summary>
-        /// <returns></returns>
+        /// <returns>retorna un mensaje de exito en el mejor de los casos, sino larga una exepcion</returns>
         public string CrearNuevoAdministrador(Administrador administrador)
         {
             if (administrador == null)
@@ -234,10 +237,11 @@ namespace Obligatorio1
             _listaUsuarios.Add(administrador);
             return "Se creo el miembro correctamente";
         }
-        
+
 
         /// <summary>
-        /// 
+        ///     Esta funcion recibe un tipo Invitacion y se valua que no este ya en la lista de Invitaciones
+        ///     una vez validado esto se agrega a la lista
         /// </summary>
         public void CrearNuevaInvitacion(Invitacion invitacion)
         {
@@ -248,10 +252,11 @@ namespace Obligatorio1
             invitacion.ValidarInvitacion();
             _listaInvitaciones.Add(invitacion);
         }
-        
+
 
         /// <summary>
-        /// 
+        ///     Esta funcion recibe un tipo Post y se valua que no este ya en la lista de Publicacion
+        ///     una vez validado esto se agrega a la lista
         /// </summary>
         public void CrearNuevoPost(Post post)
         {
@@ -262,10 +267,11 @@ namespace Obligatorio1
             post.ValidarPost();
             _listaPubicaciones.Add(post);
         }
-        
+
 
         /// <summary>
-        /// 
+        ///     Esta funcion recibe un tipo Comentario y se valua que no este ya en la lista de Publicacion
+        ///     una vez validado esto se agrega a la lista
         /// </summary>
         public void CrearNuevoComentario(Comentario coment)
         {
@@ -276,10 +282,11 @@ namespace Obligatorio1
             coment.ValidarComentario();
             _listaPubicaciones.Add(coment);
         }
-        
+
 
         /// <summary>
-        /// 
+        ///     Esta funcion recibe un tipo Reaccion y se valua que no este ya en la lista de Reaccion
+        ///     una vez validado esto se agrega a la lista
         /// </summary>
         public void CrearNuevaReaccion(Reaccion react)
         {
@@ -293,9 +300,9 @@ namespace Obligatorio1
         
 
         /// <summary>
-        /// 
+        ///     Esta funcion recibe un email, y busca en la lista de Usuarios la coincidencia con el mail de los usuarios
         /// </summary>
-        /// <returns></returns>
+        /// <returns>retorna un mimebro en el mejor de los casos, sino retorna null</returns>
         public Miembro ObtenerMiembro(string email)
         {
             Miembro? miembro = null;
@@ -311,6 +318,10 @@ namespace Obligatorio1
         }
 
 
+        /// <summary>
+        ///     Esta funcion recibe un email, y recorre toda las lista de usuarios en busca de la coincidencia de este email
+        /// </summary>
+        /// <returns>retorna true si existe un miembro con este email, sino false en el caso contrario</returns>
         public bool ExisteEmail(string email)
         {
             bool existe = false;
@@ -326,17 +337,11 @@ namespace Obligatorio1
         }
 
 
-
-
-        
-
-
-        //P1) CREAR NUEVO MIEMBRO
-
         /// <summary>
-        /// 
+        ///     Esta funcion recibe un tipo Mimebro y se valua que este no sea vacio y que no este ya en la lista de usuarios
+        ///     una vez validado esto se agrega a la lista de usuarios
         /// </summary>
-        /// <returns></returns>
+        /// <returns>retorna un mensaje de exito en el mejor de los casos, sino larga una exepcionreturns>
         public string CrearNuevoMiembro(Miembro miembro)
         {
             
@@ -352,9 +357,6 @@ namespace Obligatorio1
             _listaUsuarios.Add(miembro);
             return "Se creo el miembro correctamente";
         }
-
-        //END P1) CREAR NUEVO MIEMBRO
-
 
 
         /// <summary>
@@ -400,7 +402,6 @@ namespace Obligatorio1
         }
 
 
-
         /// <summary>
         ///     Esta funcion toma la lista de publicaciones de la cual requerimos de los comentarios y los evalua por el mimebro que lo realizo si este coincide con el email
         ///     pasado a la funcion, casteamos la publicacion a comentario y añadimos a la nueva lista la refernecia al Post que guarda comentario.
@@ -444,7 +445,6 @@ namespace Obligatorio1
                 throw e;
             }
         }
-
 
 
         /// <summary>
@@ -502,6 +502,7 @@ namespace Obligatorio1
             }
             return cant;
         }
+
 
         /// <summary>
         ///     Esta funcion toma cada miembro de la lista de usuario y cuenta la cantidad de publicaciones de cada uno y la compara con la variable 'cantidadPublicacionesMiembro'

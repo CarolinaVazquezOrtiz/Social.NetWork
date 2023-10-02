@@ -23,13 +23,18 @@ namespace Obligatorio1
             Validar();
         }
 
-
+        /// <summary>
+        ///     Esta funcion llama al Validar Email y al Validar Password
+        /// </summary>
         public void Validar()
         {
             ValidarEmail(Email);
             ValidarPassword(Password);
         }
 
+        /// <summary>
+        ///     Esta funcion verifica mediante el Formato de Email que sea valido, en caso contrario larga una excepcion
+        /// </summary>
         public static void ValidarEmail(string email)
         {
             if (!FormatoEmail(email))
@@ -38,6 +43,10 @@ namespace Obligatorio1
             }
         }
 
+        /// <summary>
+        ///     Esta funcion recibe un email el cual debe cumplir el formato con arroba y punto despues del domino del mail
+        /// </summary>
+        /// <returns>retorna true si cumple, en caso contrario false</returns>
         private static bool FormatoEmail(string email)
         {
             // Define una expresión regular para validar direcciones de correo electrónico.
@@ -46,6 +55,9 @@ namespace Obligatorio1
             return Regex.IsMatch(email, patron);
         }
 
+        /// <summary>
+        ///     Esta funcion verifica mediante el Formato de Password que sea valido, en caso contrario larga una excepcion
+        /// </summary>
         public static void ValidarPassword(string pass)
         {
             if (!FormatoPass(pass))
@@ -54,10 +66,13 @@ namespace Obligatorio1
             }
         }
 
+        /// <summary>
+        ///     Esta funcion recibe una password la cual debe cumplir que la contraseña tenga un largo entre 8 y 12 caracteres,
+        ///     que contenga una minuscula , una mayuscula, un numero y un caracter especial; 
+        /// </summary>
+        /// <returns>retorna true si cumple, en caso contrario false</returns>
         private static bool FormatoPass(string pass)
-        {
-            // Define una expresión regular que cumple con los requisitos.
-            //asumimos contrase;a largo entre 8 y 12 caracteres, que contenga una min, una may, un numero y un caracter especial; 
+        { 
             string patron = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!*._-]).{8,12}$";
             return Regex.IsMatch(pass, patron);
         }

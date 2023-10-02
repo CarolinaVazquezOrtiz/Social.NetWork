@@ -6,9 +6,7 @@ namespace EjecutarObligatorio
     public class Program
     {
         private static Sistema unSistema = new Sistema();
-        //Precarga de datos
-        //Precargar();
-
+        
         static void Main(string[] args)
         {
             //---menú en consola---
@@ -58,6 +56,9 @@ namespace EjecutarObligatorio
             } while (opcion != 0);
         }
 
+        /// <summary>
+        ///     Esta funcion llama a la Precarga de Sistema, en caso de error de esta larga una excepcion
+        /// </summary>
         private static void Precargar()
         {
             try
@@ -70,6 +71,11 @@ namespace EjecutarObligatorio
             }
         }
 
+        /// <summary>
+        ///     Esta funcion se llama desde el menu, la cual hace una lectura del ingreso en la terminal, en caso de que esta de error larga 
+        ///     una excepcion
+        /// </summary>
+        /// <returns>retorna el valor leido</returns>
         private static int PedirNumero()
         {
             int numero = 0;
@@ -91,7 +97,10 @@ namespace EjecutarObligatorio
             return numero;
         }
 
-        //Opc 1 - Registrar miembro
+        /// <summary>
+        ///     Esta funcion toma todos los datos del miembro y para crear un nuevo objeto miembro el cual
+        ///     se le pasa a la funcion CrearNuevoMiembro ubicada en sistema
+        /// </summary>
         public static void RegistrarMiembro()
         {
             try
@@ -158,8 +167,10 @@ namespace EjecutarObligatorio
             }
         }
 
-        /*Opc 2 - Dado un email de miembro listar todas las publicaciones que ha realizado, diferenciando en
-        la lista su tipo(si es post o comentario)   */
+        /// <summary>
+        ///     Esta funcion lee el email que se le pasa, para enlistar todas las publicaciones realizadas por el mimebro referenciado a ese email
+        ///     Se utiliza la funcion ListarPublicaciones ubicada en sistema
+        /// </summary>
         public static void ListarPubicacionesProgram()
         {
             try
@@ -206,7 +217,10 @@ namespace EjecutarObligatorio
             }
         }
 
-        //Opc 3 - Dado un email de mimebro, listar los posts en loq eu haya realizado comentarios.
+        /// <summary>
+        ///     Esta funcion lee el email que se le pasa, para enlistar todas las publicaciones en las que el mimebro haya hecho un comentario
+        ///     Se utiliza la funcion ListarPost ubicada en sistema
+        /// </summary>
         public static void ListarPostsComentados()
         {
             try
@@ -244,7 +258,10 @@ namespace EjecutarObligatorio
             }
         }
 
-        //Opc 4 - Listar entre dos fechas incluidas todos los Posts.
+        /// <summary>
+        ///     Esta funcion lee dos fechas que se le pasa para enlistar todas las publicaciones realizadas en ese periodo
+        ///     Se utiliza la funcion ListarPostFecha ubicada en sistema
+        /// </summary>
         public static void ListarPostsEntreFechas()
         {
             try
@@ -286,7 +303,10 @@ namespace EjecutarObligatorio
             }
         }
 
-        //Opc 5 - Desplegar los mimebros con mas publicaciones
+        /// <summary>
+        ///     Esta funcion retorna el Miembro o Mimebros (en el caso que tengan la misma cantidad de publicaciones) que contenga mas publicacion realizada de cualquier tipo
+        ///     Se utiliza la funcion MiembrosMasPublicaciones ubicada en sistema
+        /// </summary>
         public static void MiembrosConMasPublicaciones()
         {
             try

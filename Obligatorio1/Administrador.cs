@@ -13,6 +13,10 @@ namespace Obligatorio1
         {
             ValidarAdmin();
         }
+
+        /// <summary>
+        ///     Llama el validar del padre 
+        /// </summary>
         public void ValidarAdmin()
         {
             base.Validar();

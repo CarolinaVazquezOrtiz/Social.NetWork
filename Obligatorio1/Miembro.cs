@@ -31,7 +31,8 @@ namespace Obligatorio1
         }
 
         /// <summary>
-        /// 
+        ///     Esta funcion verifica que los campso Nombre y Apellido no sean vacios, ademas de esto llama al verificar 
+        ///     de la clase padre
         /// </summary>
         public void ValidarMiembro()
         {

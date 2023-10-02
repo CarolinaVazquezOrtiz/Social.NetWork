@@ -23,11 +23,18 @@ namespace Obligatorio1
             ValidarReaccion();
         }
         
+        /// <summary>
+        ///     Esta funcion llama al validar Tipo Reaccion
+        /// </summary>
         public void ValidarReaccion()
         {
             ValidarTipoReaccion(TipoReaccion);
         }
 
+        /// <summary>
+        ///     Esta funcion verifica que el tipo de reaccion se dislike o like en caso contrario
+        ///     larga una excepcion
+        /// </summary>
         public static void ValidarTipoReaccion(string tipoReaccion)
         {
             if (tipoReaccion.ToLower() != "like" && tipoReaccion.ToLower() != "dislike")
