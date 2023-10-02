@@ -24,9 +24,10 @@ namespace Obligatorio1
 
 
         //-------------PRECARGA DE DATOS------------
-
         
-        
+        /// <summary>
+        ///     En esta funcion se llaman a las precargas para ejecutarlas dentro de la clase sistema ya que son funciones privadas.
+        /// </summary>
         public void Precargas()
         {
             PrecargarMiembros();
@@ -37,6 +38,9 @@ namespace Obligatorio1
             PrecargarReacciones();
         }
 
+        /// <summary>
+        ///     En esta funcion se precargan todos los mimebros pedidos por las letra del Obligatorio usando una funcion CrearNuevoMiembro que se vera mas adelante
+        /// </summary>
         private void PrecargarMiembros()
         {
             Miembro miembro1 = new Miembro("caro19@gmail.com", "Estrella-1", false, "Carolina", "Vazquez", new DateTime(1991, 10, 10));
@@ -63,12 +67,18 @@ namespace Obligatorio1
             CrearNuevoMiembro(miembro11);       //posicion 10 de la lista
         }
 
+        /// <summary>
+        ///     En esta funcion se precarga el administrador que se pide en la letra del Obligatorio usando una funcion CrearNuevoAdministrador que se vera mas adelante
+        /// </summary>
         private void PrecargarAdministradores()
         {
             Administrador admin1 = new Administrador("guille77@gmail.com", "Pluton-77", true);
             CrearNuevoAdministrador(admin1);
         }
 
+        /// <summary>
+        ///     En esta funcion se precarga las invitaciones que se pide en la letra del Obligatorio usando una funcion CrearNuevaInvitacion que se vera mas adelante
+        /// </summary>
         private void PrecargarInvitaciones()
         {
             //Invitaciones del miembro en posicion 0 en estado APROBADO
@@ -122,7 +132,9 @@ namespace Obligatorio1
             CrearNuevaInvitacion(invita21);
         }
 
-        ///NOTA: Algunos datos de estos post, fueron generados por ChatGPT y modificados 
+        /// <summary>
+        ///     En esta funcion se precargan los Posts que se pide en la letra del Obligatorio usando una funcion CrearNuevoPost que se vera mas adelante
+        /// </summary>
         private void PrecargarPosts()
         {
             //Post [0]
@@ -142,7 +154,9 @@ namespace Obligatorio1
             CrearNuevoPost(post5);
         }
 
-        ///NOTA: Generados por ChatGPT 
+        /// <summary>
+        ///     En esta funcion se precargan los Comentarios que se pide en la letra del Obligatorio usando una funcion CrearNuevoComentario que se vera mas adelante
+        /// </summary>
         private void PrecargarComentarios()
         {
             //Post [0]
@@ -182,7 +196,10 @@ namespace Obligatorio1
             CrearNuevoComentario(comentario15);
         }
 
-        private void PrecargarReacciones() //like o dislike
+        /// <summary>
+        ///     En esta funcion se precargan las Reacciones que se pide en la letra del Obligatorio usando una funcion CrearNuevaReaccion que se vera mas adelante
+        /// </summary>
+        private void PrecargarReacciones()
         {
             //reacciones a Post
             Reaccion reaccion1 = new Reaccion("like", _listaUsuarios[1] as Miembro, _listaPubicaciones[0] as Post);
@@ -194,67 +211,15 @@ namespace Obligatorio1
             CrearNuevaReaccion(reaccion3);
             Reaccion reaccion4 = new Reaccion("dislike", _listaUsuarios[3] as Miembro, _listaPubicaciones[4] as Post);
             CrearNuevaReaccion(reaccion4);
-        }
+        }  
         
         //END -------------PRECARGA DE DATOS------------
 
 
-        //LOGIN USUARIO
-        public string Login(string email, string pass)
-        {
-            string mensaje = "Error de sistema";
-            if (ExisteEmail(email))
-            {
-                if (VerificarPass(email, pass))
-                {
-                    mensaje = "Login Correcto!";
-                }
-                else
-                {
-                    mensaje = "La password ingresada no coincide! Intente nuevamente";
-                }
-            }
-            else
-            {
-                mensaje = "El mail ingresado no existe! Intente nuevamente";
-            }
-            return mensaje;
-        }
-
-        private bool ExisteEmail(string email)
-        {
-            bool existe = false;
-            foreach (Usuario usu in _listaUsuarios)
-            {
-                if (usu.Email == email)
-                {
-                    existe = true;
-                    break;
-                }
-            }
-            return existe;
-        }
-
-        private bool VerificarPass(string email, string pass)
-        {
-            bool existe = false;
-            foreach (Usuario usu in _listaUsuarios)
-            {
-                if (usu.Email == email)
-                {
-                    if (usu.Password == pass)
-                    {
-                        existe = true;
-                        break;
-                    }
-                }
-            }
-            return existe;
-        }
-        //END LOGIN USUARIO
-
-
-        //CREAR NUEVO ADMINISTRADOR
+        /// <summary>
+        ///     Se recibe un tipo administrador
+        /// </summary>
+        /// <returns></returns>
         public string CrearNuevoAdministrador(Administrador administrador)
         {
             if (administrador == null)
@@ -273,9 +238,11 @@ namespace Obligatorio1
             _listaUsuarios.Add(administrador);
             return "Se creo el miembro correctamente";
         }
-        //END CREAR NUEVO ADMINISTRADOR
+        
 
-        //CREAR NUEVA INVITACION
+        /// <summary>
+        /// 
+        /// </summary>
         public void CrearNuevaInvitacion(Invitacion invitacion)
         {
             if (invitacion.MiembroSolicitado is Miembro && invitacion.MiembroSolicitante is Miembro)
@@ -289,9 +256,11 @@ namespace Obligatorio1
             invitacion.ValidarInvitacion();
             _listaInvitaciones.Add(invitacion);
         }
-        //END CREAR NUEVA INVITACION
+        
 
-        //CREAR NUEVO POST
+        /// <summary>
+        /// 
+        /// </summary>
         public void CrearNuevoPost(Post post)
         {
             if (post.Miembro is Miembro)
@@ -305,10 +274,11 @@ namespace Obligatorio1
             post.ValidarPost();
             _listaPubicaciones.Add(post);
         }
-        //END CREAR NUEVO POST
+        
 
-
-        //CREAR NUEVO COMENTARIO
+        /// <summary>
+        /// 
+        /// </summary>
         public void CrearNuevoComentario(Comentario coment)
         {
             if (coment.Miembro is Miembro)
@@ -322,10 +292,11 @@ namespace Obligatorio1
             coment.ValidarComentario();
             _listaPubicaciones.Add(coment);
         }
-        //END CREAR NUEVO COMENTARIO
+        
 
-
-        //CREAR NUEVA REACCION
+        /// <summary>
+        /// 
+        /// </summary>
         public void CrearNuevaReaccion(Reaccion react)
         {
             if (react.Miembro is Miembro)
@@ -339,9 +310,12 @@ namespace Obligatorio1
             react.ValidarReaccion();
             _listaReacciones.Add(react);
         }
-        //END CREAR NUEVA REACCION
+        
 
-        //OBTENER MIEMBRO
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Miembro ObtenerMiembro(string email)
         {
             Miembro? miembro = null;
@@ -355,19 +329,34 @@ namespace Obligatorio1
             }
             return miembro;
         }
-        //END OBTENER MIEMBRO
+
+
+        public bool ExisteEmail(string email)
+        {
+            bool existe = false;
+            foreach (Usuario usu in _listaUsuarios)
+            {
+                if (usu.Email == email)
+                {
+                    existe = true;
+                    break;
+                }
+            }
+            return existe;
+        }
 
 
 
 
-
-
-
-
-
+        
 
 
         //P1) CREAR NUEVO MIEMBRO
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string CrearNuevoMiembro(Miembro miembro)
         {
             
@@ -377,17 +366,17 @@ namespace Obligatorio1
             }
             if (_listaUsuarios.Contains(miembro))
             {
-                throw new Exception($"El miembro ya existe."); 
+                throw new Exception($"El miembro ya existe.");
             }
             miembro.ValidarMiembro();
             _listaUsuarios.Add(miembro);
             return "Se creo el miembro correctamente";
         }
+
         //END P1) CREAR NUEVO MIEMBRO
 
 
         //P2) listar todas las publicaciones de un MIEMBRO
-
 
         /// <summary>
         /// 
@@ -430,12 +419,16 @@ namespace Obligatorio1
             }
 
         }
-        
+
         //END P2) listar todas las publicaciones de un MIEMBRO
 
 
-        //P3) listar todas los post haya realizado comentarios
-        
+
+        /// <summary>
+        ///     Esta funcion toma la lista de publicaciones de la cual requerimos de los comentarios y los evalua por el mimebro que lo realizo si este coincide con el email
+        ///     pasado a la funcion, casteamos la publicacion a comentario y añadimos a la nueva lista la refernecia al Post que guarda comentario.
+        /// </summary>
+        /// <returns>retorna una lista de post filtra</returns>
         public List<Post> ListarPost(string email)
         {
             try
@@ -474,14 +467,15 @@ namespace Obligatorio1
                 throw e;
             }
         }
-        //END P3) listar todas las publicaciones de un MIEMBRO
 
 
-        // P4) Listar entre dos fechas todos los Posts
+
         /// <summary>
-        ///     
+        ///     Esta funcion toma la lista de publicaciones y solamente agrega a una lista de tipo post aquellas pubicaciones
+        ///     que sean del tipo post que esten entre la fechas 'fechaInicio' y  'fechaFin'.
+        ///     Luego de esto se ordena de forma descendente por el titulo del post
         /// </summary>
-        /// <returns></returns>
+        /// <returns>retorna una lista de post filtrada</returns>
         public List<Post> ListarPostFecha(DateTime fechaInicio, DateTime fechaFin)
         {
             try
@@ -513,31 +507,32 @@ namespace Obligatorio1
             }
             
         }
-        //END P4) listar todas los post haya realizado comentarios
 
 
-        // P5) Obtener los miembros que haya realizado mas publicaciones de cualquier tipo
         /// <summary>
-        /// 
+        ///     Esta funcion toma el email del miembro y lo compara con todas las publicaciones que contengan un Mimebro con el mismo email
         /// </summary>
-        /// <returns></returns>
-        public int CantidadPublicaciones(string mail)
+        /// <returns>retorna la cantidad de coincidencias</returns>
+        public int CantidadPublicaciones(string email)
         {
             int cant = 0;
             foreach (Publicacion pub in _listaPubicaciones)
             {
-                if (pub.Miembro.Email == mail)
+                if (pub.Miembro.Email == email)
                 {
                     cant++;
                 }
             }
             return cant;
         }
-        
+
         /// <summary>
-        /// 
+        ///     Esta funcion toma cada miembro de la lista de usuario y cuenta la cantidad de publicaciones de cada uno y la compara con la variable 'cantidadPublicacionesMiembro'
+        ///     evaluando cual es mayo, en el caso de que la cantidad de publicaciones del mimebro sea mayor a la variable 'cantidadPublicacionesMiembro' esta pasa a tomar la cantidad
+        ///     de publiaciones del miembro.
+        ///     Luego de esto se guardan todos los usuarios que tengan la misma cantidad de publiaciones que la variable 'cantidadPublicacionesMiembro' a una lista nueva.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>retorna una lista de mimebros filtrada</returns>
         public List<Miembro> MiembrosMasPublicaciones()
         {
             List<Miembro> listaAux = new List<Miembro>(); 
@@ -572,7 +567,7 @@ namespace Obligatorio1
             return listaAux;
 
         }
-        //END P5) Obtener los miembros que haya realizado mas publicaciones de cualquier tipo
+
 
         
     }

@@ -96,6 +96,18 @@ namespace EjecutarObligatorio
         {
             try
             {
+
+                Console.WriteLine("Ingrese el email del Miembro:");
+                string email = Console.ReadLine();
+                if (string.IsNullOrEmpty(email))
+                {
+                    throw new Exception("El campo esta vacio, ingrese un email");
+                }
+                if (unSistema.ExisteEmail(email))
+                {
+                    throw new Exception("El email que ingreso ya existe");
+                }
+
                 Console.WriteLine("Ingrese el Nombre del Miembro:");
                 string nombre = Console.ReadLine();
                 if (string.IsNullOrEmpty(nombre))
@@ -115,13 +127,6 @@ namespace EjecutarObligatorio
                 if (fechaNacimiento == DateTime.MinValue)
                 {
                     throw new Exception("El campo esta vacio, ingrese una fecha de nacimiento");
-                }
-
-                Console.WriteLine("Ingrese el email del Miembro:");
-                string email = Console.ReadLine();
-                if (string.IsNullOrEmpty(email))
-                {
-                    throw new Exception("El campo esta vacio, ingrese un email");
                 }
 
                 Console.WriteLine("Ingrese la password del Miembro:");
